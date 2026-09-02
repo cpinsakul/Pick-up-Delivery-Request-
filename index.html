@@ -3,45 +3,175 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Asset Delivery & Pickup Request</title>
+<title>VOC Pick Up & Delivery Request v1.0</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:#172033}.hidden{display:none!important}.topbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e4e9f2;padding:12px 20px;display:flex;justify-content:space-between;align-items:center}.brand{font-weight:800}.userbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.pill{padding:7px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-size:12px;font-weight:700}.wrap{max-width:1220px;margin:22px auto 50px;padding:0 16px}.login{max-width:520px;margin:70px auto;background:#fff;border:1px solid #e4e9f2;border-radius:18px;padding:28px;box-shadow:0 12px 30px rgba(16,24,40,.08)}.login h1{margin:0 0 6px}.muted{color:#667085;font-size:13px;line-height:1.5}.hero,.card{background:#fff;border:1px solid #e4e9f2;border-radius:16px;box-shadow:0 7px 22px rgba(16,24,40,.035)}.hero{padding:22px}.hero h1{margin:0 0 7px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab,button{border:0;border-radius:9px;padding:10px 13px;font-weight:700;cursor:pointer}.tab{background:#fff;border:1px solid #ccd5e3}.tab.active,.primary{background:#172033;color:#fff}.secondary{background:#eef2f6;color:#172033}.approve{background:#dcfce7;color:#166534}.reject{background:#fee2e2;color:#991b1b}.panel{display:none}.panel.active{display:block}.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px}.stat{background:#fff;border:1px solid #e4e9f2;border-radius:14px;padding:15px}.stat small{color:#667085;font-weight:700}.stat strong{display:block;font-size:27px;margin-top:5px}.card{padding:20px}.section-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.full{grid-column:1/-1}label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}input,select,textarea{width:100%;padding:10px 11px;border:1px solid #cbd5e1;border-radius:9px;background:#fff;font-size:14px}textarea{min-height:88px;resize:vertical}.type-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:15px}.type-card{padding:13px;border:1px solid #cbd5e1;border-radius:11px;cursor:pointer}.type-card.active{background:#eef2ff;border-color:#6366f1}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.notice{margin-top:14px;padding:12px 14px;border-radius:10px;background:#ecfdf3;border:1px solid #abefc6;color:#067647}.error{background:#fef3f2;border-color:#fecdca;color:#b42318}.role-note{margin-top:12px;padding:10px 12px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:10px;font-size:13px;color:#475467}table{width:100%;border-collapse:collapse;font-size:13px}th{padding:10px;text-align:left;background:#f8fafc;color:#667085;border-bottom:1px solid #e4e9f2}td{padding:11px 10px;border-bottom:1px solid #eef2f6;vertical-align:top}.badge{display:inline-block;padding:5px 8px;border-radius:999px;font-size:11px;font-weight:700}.draft{background:#e0e7ff;color:#3730a3}.pending{background:#fef3c7;color:#92400e}.approved{background:#dcfce7;color:#166534}.rejected{background:#fee2e2;color:#991b1b}.processing{background:#dbeafe;color:#1d4ed8}.completed{background:#e5e7eb;color:#374151}.filters{display:flex;gap:8px;flex-wrap:wrap}.filters input,.filters select{width:auto;min-width:145px}.modal{position:fixed;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:center;justify-content:center;padding:18px;z-index:50}.modal-card{width:min(860px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:16px;padding:20px}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.close{background:#eef2f6}.receipt{border:1px solid #d0d5dd;border-radius:14px;overflow:hidden}.receipt-head{padding:18px;background:#f8fafc;border-bottom:1px solid #d0d5dd}.receipt-body{padding:18px}.receipt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.receipt-item{padding:10px;border:1px solid #eaecf0;border-radius:10px}.receipt-item small{display:block;color:#667085;margin-bottom:4px}.timeline{margin-top:18px;border-top:1px solid #eaecf0;padding-top:12px}.event{display:grid;grid-template-columns:160px 1fr;gap:10px;padding:9px 0;border-bottom:1px dashed #eaecf0}.event:last-child{border-bottom:0}.confirm-box{background:#fffaeb;border:1px solid #fedf89;border-radius:12px;padding:14px;margin-top:14px}.confirm-box strong{display:block;margin-bottom:4px}.reqid{font-family:Consolas,monospace;font-weight:800}.smallbtn{padding:7px 9px;font-size:12px}.successTitle{font-size:22px;margin:0 0 5px}.successIcon{font-size:34px}.summaryBand{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.summaryBand div{padding:10px;background:#f8fafc;border-radius:10px;border:1px solid #eaecf0}.summaryBand small{display:block;color:#667085}.summaryBand strong{display:block;margin-top:3px}.required-note{font-size:12px;color:#667085;margin-bottom:12px}.login-grid{display:grid;gap:12px;margin-top:18px}.asset-box{grid-column:1/-1;border:1px solid #dbe2ea;border-radius:12px;padding:14px;background:#fbfcfe}.asset-entry{display:grid;grid-template-columns:1.25fr 1fr 1fr .55fr auto;gap:10px;align-items:end;margin-top:10px}.asset-list{margin-top:14px;border:1px solid #e4e9f2;border-radius:10px;overflow:hidden}.asset-list table{margin:0}.asset-total{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 12px;background:#f8fafc;border-top:1px solid #e4e9f2;font-size:13px}.dangerbtn{background:#fff1f2;color:#be123c;border:1px solid #fecdd3}.asset-chip{display:inline-block;padding:4px 7px;border-radius:7px;background:#f1f5f9;margin:2px 4px 2px 0;font-size:11px}.empty-assets{padding:14px;color:#667085;text-align:center;font-size:13px}.login-grid{display:grid;gap:12px;margin-top:18px}
-@media(max-width:950px){.stats{grid-template-columns:repeat(3,1fr)}.summaryBand{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.grid,.type-row,.receipt-grid{grid-template-columns:1fr}.full{grid-column:auto}.stats{grid-template-columns:repeat(2,1fr)}.event{grid-template-columns:1fr}.summaryBand{grid-template-columns:1fr}}
+
+:root{
+  --voc-navy:#0b2e59;
+  --voc-blue:#1557a8;
+  --voc-blue-2:#1f6fc6;
+  --voc-sky:#eaf3fb;
+  --voc-teal:#0f766e;
+  --ink:#172033;
+  --muted:#667085;
+  --line:#d9e2ec;
+  --panel:#ffffff;
+  --bg:#f3f6f9;
+  --danger:#b42318;
+  --warning:#9a6700;
+  --success:#16794f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+button,input,select,textarea{font:inherit}
+button{transition:.16s ease}
+button:hover{transform:translateY(-1px)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(31,111,198,.18);outline-offset:1px}
+.hidden{display:none!important}
+.topbar{position:sticky;top:0;z-index:20;background:var(--voc-navy);color:#fff;padding:0 22px;min-height:64px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(11,46,89,.18)}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.1px}.brand-mark{width:34px;height:34px;border-radius:8px;background:#fff;color:var(--voc-navy);display:grid;place-items:center;font-weight:900;font-size:13px}.brand-sub{font-size:11px;font-weight:600;opacity:.8;display:block;margin-top:1px}.userbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.pill{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.13);color:#fff;border:1px solid rgba(255,255,255,.18);font-size:12px;font-weight:700}
+.wrap{max-width:1240px;margin:24px auto 50px;padding:0 18px}
+.login-shell{min-height:100vh;background:linear-gradient(135deg,var(--voc-navy),#174f89 58%,#1f6fc6);display:grid;place-items:center;padding:28px}.login{width:min(540px,100%);margin:0;background:#fff;border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:30px;box-shadow:0 24px 55px rgba(7,30,58,.28)}.login-brand{display:flex;gap:12px;align-items:center;margin-bottom:18px}.login-logo{width:48px;height:48px;border-radius:12px;background:var(--voc-navy);color:#fff;display:grid;place-items:center;font-weight:900}.login h1{margin:0 0 5px;font-size:27px}.login-grid{display:grid;gap:14px;margin-top:20px}
+.muted{color:var(--muted);font-size:13px;line-height:1.5}
+.hero,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 6px 20px rgba(16,24,40,.04)}.hero{padding:24px;border-top:4px solid var(--voc-blue)}.hero h1{margin:0 0 6px;font-size:26px}.eyebrow{color:var(--voc-blue);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab,button{border:0;border-radius:9px;padding:10px 14px;font-weight:700;cursor:pointer}.tab{background:#fff;border:1px solid #cbd7e4;color:#344054}.tab:hover{border-color:var(--voc-blue);color:var(--voc-blue)}.tab.active,.primary{background:var(--voc-blue);color:#fff}.primary:hover{background:#0f4e98}.secondary{background:#eef3f8;color:#24415e;border:1px solid #d8e2ec}.secondary:hover{background:#e4edf6}.approve{background:#e6f7ef;color:#12633f;border:1px solid #b7e5cf}.reject{background:#fff0ef;color:#9f2a20;border:1px solid #f5c7c2}.dangerbtn{background:#fff1f2;color:#be123c;border:1px solid #fecdd3}.panel{display:none}.panel.active{display:block}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;position:relative;overflow:hidden}.stat:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#d7e4f0}.stat:nth-child(1):before{background:var(--voc-navy)}.stat:nth-child(2):before{background:#6b7280}.stat:nth-child(3):before{background:#d99b00}.stat:nth-child(4):before{background:#239b66}.stat:nth-child(5):before{background:var(--voc-blue-2)}.stat:nth-child(6):before{background:#0f766e}.stat small{color:var(--muted);font-weight:700}.stat strong{display:block;font-size:29px;margin-top:4px;color:var(--voc-navy)}
+.card{padding:22px}.section-title{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:16px}.section-title h2{color:var(--voc-navy);font-size:20px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.full{grid-column:1/-1}label{display:block;font-size:12px;font-weight:750;margin-bottom:6px;color:#344054}input,select,textarea{width:100%;padding:11px 12px;border:1px solid #c8d4e0;border-radius:9px;background:#fff;color:#172033}input[readonly]{background:#f4f7fa;color:#52606d}textarea{min-height:96px;resize:vertical}input:hover,select:hover,textarea:hover{border-color:#aebdca}.field-help{font-size:11px;color:#7a8694;margin-top:4px}
+.type-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}.type-card{padding:15px;border:1px solid #cbd5e1;border-radius:12px;cursor:pointer;background:#fff}.type-card:hover{border-color:var(--voc-blue)}.type-card.active{background:var(--voc-sky);border-color:var(--voc-blue);box-shadow:inset 0 0 0 1px var(--voc-blue)}.type-card strong{color:var(--voc-navy)}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}.notice{margin-top:14px;padding:12px 14px;border-radius:10px;background:#ecfdf3;border:1px solid #abefc6;color:#067647}.notice.error{background:#fef3f2;border-color:#fecdca;color:#b42318}.role-note{margin-top:14px;padding:11px 13px;background:#f7fafc;border-left:4px solid var(--voc-blue);border-radius:8px;font-size:13px;color:#475467}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{padding:11px;text-align:left;background:#edf3f8;color:#41566b;border-bottom:1px solid #d7e1eb;font-size:12px;text-transform:uppercase;letter-spacing:.025em}td{padding:12px 11px;border-bottom:1px solid #edf1f5;vertical-align:top;background:#fff}tbody tr:hover td{background:#fbfdff}.badge{display:inline-block;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:750;white-space:nowrap}.draft{background:#eef2f7;color:#52606d}.pending{background:#fff4d6;color:#8a5a00}.approved{background:#e3f5eb;color:#12633f}.rejected{background:#fee9e7;color:#9f2a20}.processing{background:#e7f1fb;color:#1557a8}.completed{background:#e5f4f1;color:#0f766e}.filters{display:flex;gap:8px;flex-wrap:wrap}.filters input,.filters select{width:auto;min-width:150px}
+.modal{position:fixed;inset:0;background:rgba(10,31,53,.58);display:flex;align-items:center;justify-content:center;padding:18px;z-index:50}.modal-card{width:min(900px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:17px;padding:22px;box-shadow:0 24px 60px rgba(4,25,46,.28)}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:17px}.close{background:#eef3f8;color:#344054}.receipt{border:1px solid #d6e0ea;border-radius:14px;overflow:hidden}.receipt-head{padding:18px;background:#f0f5fa;border-bottom:1px solid #d6e0ea}.receipt-body{padding:18px}.receipt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.receipt-item{padding:11px;border:1px solid #e3e9ef;border-radius:10px;background:#fff}.receipt-item small{display:block;color:var(--muted);margin-bottom:4px}.timeline{margin-top:18px;border-top:1px solid #e1e8ef;padding-top:12px}.timeline h3{color:var(--voc-navy)}.event{display:grid;grid-template-columns:170px 1fr;gap:10px;padding:10px 0;border-bottom:1px dashed #dbe3ea}.event:last-child{border-bottom:0}.confirm-box{background:#fff8e6;border:1px solid #f0d38a;border-radius:12px;padding:14px;margin-top:14px}.reqid{font-family:Consolas,"Courier New",monospace;font-weight:800;color:var(--voc-navy)}.smallbtn{padding:7px 9px;font-size:12px}.successTitle{font-size:22px;margin:0 0 5px}.successIcon{width:42px;height:42px;border-radius:50%;background:#e6f7ef;color:#12633f;display:grid;place-items:center;font-size:24px;font-weight:900;margin-bottom:8px}.summaryBand{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.summaryBand div{padding:11px;background:#f7fafc;border-radius:10px;border:1px solid #e3e9ef}.summaryBand small{display:block;color:var(--muted)}.summaryBand strong{display:block;margin-top:3px}.required-note{font-size:12px;color:var(--muted);margin-bottom:12px}
+.asset-box{grid-column:1/-1;border:1px solid #ccd9e5;border-radius:13px;padding:16px;background:#f8fbfe}.asset-entry{display:grid;grid-template-columns:1.2fr 1fr 1fr .55fr auto;gap:10px;align-items:end;margin-top:10px}.asset-list{margin-top:14px;border:1px solid #dde5ed;border-radius:10px;overflow:hidden;background:#fff}.asset-total{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 12px;background:#eef4f9;border-top:1px solid #dbe5ee;font-size:13px}.empty-assets{padding:16px;color:var(--muted);text-align:center;font-size:13px}
+
+.report-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.report-kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.report-kpi small{display:block;color:var(--muted);font-weight:700}
+.report-kpi strong{display:block;color:var(--voc-navy);font-size:26px;margin-top:4px}
+.report-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.report-block{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.report-block h3{margin:0 0 14px;color:var(--voc-navy);font-size:16px}
+.bar-row{display:grid;grid-template-columns:145px 1fr 48px;gap:10px;align-items:center;margin:10px 0;font-size:12px}
+.bar-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#344054;font-weight:650}
+.bar-track{height:10px;border-radius:999px;background:#eaf0f6;overflow:hidden}
+.bar-fill{height:100%;border-radius:999px;background:var(--voc-blue)}
+.bar-value{text-align:right;color:#52606d;font-weight:700}
+.report-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.result-count{font-size:12px;color:var(--muted);font-weight:650}
+.search-wrap{display:flex;gap:6px;align-items:center}
+.search-wrap input{min-width:240px}
+.empty-report{padding:18px;text-align:center;color:var(--muted);font-size:13px}
+
+
+.help-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.help-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.help-card h3{margin:0 0 8px;color:var(--voc-navy);font-size:17px}
+.help-card h4{margin:14px 0 6px;color:#344054;font-size:14px}
+.help-card p,.help-card li{font-size:13px;line-height:1.55;color:#475467}
+.help-card ul,.help-card ol{margin:8px 0 0 20px;padding:0}
+.workflow{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap;margin-top:12px}
+.workflow-step{flex:1;min-width:150px;background:#f8fbff;border:1px solid #d7e4f0;border-radius:12px;padding:14px;position:relative}
+.workflow-step strong{display:block;color:var(--voc-navy);margin-bottom:4px}
+.workflow-arrow{display:flex;align-items:center;font-weight:800;color:var(--voc-blue);font-size:18px}
+.version-box{background:linear-gradient(135deg,#0f2740,#164f7a);color:#fff;border-radius:14px;padding:18px}
+.version-box small{opacity:.8;display:block}
+.version-box strong{font-size:28px;display:block;margin:3px 0 6px}
+.about-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.about-meta div{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px}
+.about-meta small{display:block;color:var(--muted)}
+.about-meta strong{display:block;margin-top:4px;color:var(--voc-navy)}
+.callout{background:#fff8e8;border:1px solid #f4cf7a;border-radius:12px;padding:13px;margin-top:12px;color:#7a4b00;font-size:13px;line-height:1.5}
+.faq-item{border-top:1px solid var(--line);padding:12px 0}
+.faq-item:first-child{border-top:0}
+.faq-item strong{color:#344054}
+@media(max-width:850px){.help-grid{grid-template-columns:1fr}.about-meta{grid-template-columns:1fr}.workflow{display:grid;grid-template-columns:1fr}.workflow-arrow{display:none}}
+
+
+.manual-shell{display:grid;grid-template-columns:240px 1fr;gap:18px}
+.manual-nav{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:14px;align-self:start;position:sticky;top:88px}
+.manual-nav strong{display:block;color:var(--voc-navy);margin-bottom:10px}
+.manual-nav button{width:100%;text-align:left;background:transparent;color:#344054;border:0;padding:8px 9px;border-radius:8px;font-weight:650}
+.manual-nav button:hover{background:#eaf2f8;color:var(--voc-blue)}
+.manual-content{min-width:0}
+.manual-section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px;scroll-margin-top:100px}
+.manual-section h3{margin:0 0 8px;color:var(--voc-navy)}
+.manual-section h4{margin:14px 0 6px;color:#344054}
+.manual-section p,.manual-section li{font-size:13px;line-height:1.6;color:#475467}
+.manual-section ol,.manual-section ul{margin:8px 0 0 20px;padding:0}
+.manual-step{display:grid;grid-template-columns:34px 1fr;gap:10px;margin:10px 0}
+.manual-step-num{width:28px;height:28px;border-radius:50%;background:var(--voc-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+.manual-tip{background:#eef6fb;border-left:4px solid var(--voc-blue);padding:11px 12px;border-radius:8px;margin-top:10px;font-size:13px;color:#344054}
+.manual-warning{background:#fff7e8;border-left:4px solid #c68a00;padding:11px 12px;border-radius:8px;margin-top:10px;font-size:13px;color:#6b4700}
+.manual-toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.manual-toolbar .actions{margin-top:0}
+.manual-search{min-width:260px}
+@media(max-width:850px){.manual-shell{grid-template-columns:1fr}.manual-nav{position:static}.manual-search{min-width:0;width:100%}}
+@media print{
+  .topbar,.tabs,.hero,.manual-nav,.manual-toolbar button{display:none!important}
+  .wrap{max-width:none;margin:0;padding:0}
+  .panel{display:none!important}
+  #help.panel{display:block!important}
+  .card{box-shadow:none;border:0;padding:0}
+  .manual-section{break-inside:avoid;border:0;border-bottom:1px solid #ddd;border-radius:0}
+}
+
+
+.user-admin-grid{display:grid;grid-template-columns:1.05fr 1.95fr;gap:16px}
+.user-form{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:16px}
+.user-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
+.section-checks{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:6px}
+.section-check{display:flex;gap:8px;align-items:center;padding:8px 9px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:12px}
+.section-check input{width:auto}
+.user-actions{display:flex;gap:6px;flex-wrap:wrap}
+.access-chip{display:inline-block;padding:4px 7px;border-radius:999px;background:#eaf2f8;color:var(--voc-navy);font-size:11px;font-weight:700;margin:2px 3px 2px 0}
+.inactive-user{opacity:.58}
+@media(max-width:950px){.user-admin-grid{grid-template-columns:1fr}}
+
+.queue-note{font-size:12px;color:#667085;margin-top:3px}.workflow{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:13px}.workflow span{font-size:12px;padding:6px 9px;border-radius:999px;background:#eef3f8;color:#41566b;font-weight:700}.workflow b{color:#94a3b8}.edit-banner{margin-bottom:14px;padding:11px 13px;border-radius:10px;background:#eaf3fb;border:1px solid #c6dff3;color:#174f89;font-size:13px;font-weight:650}
+@media(max-width:950px){.report-grid{grid-template-columns:repeat(2,1fr)}.report-layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}.summaryBand{grid-template-columns:repeat(2,1fr)}.asset-entry{grid-template-columns:1fr 1fr}.asset-entry button{align-self:end}}
+@media(max-width:650px){.report-grid{grid-template-columns:1fr}.bar-row{grid-template-columns:110px 1fr 38px}.search-wrap{width:100%}.search-wrap input{min-width:0;flex:1}.topbar{padding:10px 14px}.brand-sub{display:none}.wrap{padding:0 12px}.grid,.type-row,.receipt-grid{grid-template-columns:1fr}.full{grid-column:auto}.stats{grid-template-columns:repeat(2,1fr)}.event{grid-template-columns:1fr}.summaryBand{grid-template-columns:1fr}.section-title{align-items:flex-start;flex-direction:column}.filters{width:100%}.filters input,.filters select{width:100%}.asset-entry{grid-template-columns:1fr}.modal{padding:10px}.modal-card{padding:16px}.login{padding:24px}}
+@media print{.topbar,.tabs,.actions,.close,.filters,.role-note{display:none!important}body{background:#fff}.modal{position:static;background:#fff;padding:0}.modal-card{box-shadow:none;max-height:none;width:100%}}
 
 </style>
 </head>
 <body>
-<div id="loginScreen" class="login">
-  <h1>Asset Delivery & Pickup</h1>
-  <p class="muted">Role-based demo login for Employee, Supervisor, and Admin workflow testing.</p>
+<div id="loginShell" class="login-shell"><div id="loginScreen" class="login">
+  <div class="login-brand"><div class="login-logo">VOC</div><div><div class="eyebrow">Operations Request System</div><h1>VOC Pick Up & Delivery Request</h1></div></div>
+  <p class="muted">IDP-style role workflow for Employee, Supervisor, and Admin request management.</p>
   <div class="login-grid">
     <div><label>Name</label><input id="loginName" value="Demo User"></div>
     <div><label>Employee ID</label><input id="loginEmpId" value="1002456" maxlength="7"></div>
-    <div><label>Role</label><select id="loginRole"><option>Employee</option><option>Supervisor</option><option>Admin</option></select></div>
+    <div><label>Role</label><select id="loginRole" onchange="selectDemoRole()"><option>Employee</option><option>Supervisor</option><option>Admin</option></select></div>
     <button class="primary" onclick="login()">Sign In</button>
   </div>
-</div>
+  <div class="manual-tip" style="margin-top:12px">
+    <strong>Demo login:</strong>
+    Select Employee, Supervisor, or Admin and the matching demo account will load automatically.
+    Managed users still use their saved role and granted section access when their Employee ID is entered manually.
+  </div>
+
+</div></div>
 
 <div id="app" class="hidden">
-  <div class="topbar"><div class="brand">Asset Delivery & Pickup</div><div class="userbox"><span id="who" class="pill"></span><span id="rolePill" class="pill"></span><button class="secondary" onclick="logout()">Change Role</button></div></div>
+  <div class="topbar"><div class="brand"><div class="brand-mark">VOC</div><div>VOC Pick Up & Delivery Request<span class="brand-sub">Operations Request Management • Version 1.0</span></div></div><div class="userbox"><span id="who" class="pill"></span><span id="rolePill" class="pill"></span><button class="secondary" onclick="logout()">Change Role</button></div></div>
   <div class="wrap">
-    <div class="hero"><h1>Delivery & Pickup Request Management</h1><p class="muted">Submit, approve, process, and complete asset movement requests with full request history.</p><div id="roleNote" class="role-note"></div></div>
+    <div class="hero"><div class="eyebrow">VOC Operations • IDP-style workflow</div><h1>VOC Pick Up & Delivery Request</h1><p class="muted">A controlled workflow for requesting, approving, processing, and completing asset movement with full activity history.</p><div class="workflow"><span>1. Employee Request</span><b>→</b><span>2. Supervisor Approval</span><b>→</b><span>3. Operations Processing</span><b>→</b><span>4. Complete</span></div><div id="roleNote" class="role-note"></div></div>
     <div id="tabs" class="tabs"></div>
 
     <section id="dashboard" class="panel active">
       <div class="stats">
         <div class="stat"><small>Total</small><strong id="sTotal">0</strong></div><div class="stat"><small>Draft</small><strong id="sDraft">0</strong></div><div class="stat"><small>Pending</small><strong id="sPending">0</strong></div><div class="stat"><small>Approved</small><strong id="sApproved">0</strong></div><div class="stat"><small>Processing</small><strong id="sProcessing">0</strong></div><div class="stat"><small>Completed</small><strong id="sCompleted">0</strong></div>
       </div>
-      <div class="card"><div class="section-title"><div><h2 style="margin:0">Request Dashboard</h2><div class="muted">Track request status and open the full submission record.</div></div><div class="filters"><input id="searchBox" placeholder="Search request, asset, employee" oninput="renderDashboard()"><select id="statusFilter" onchange="renderDashboard()"><option value="All">All Status</option><option>Draft</option><option>Pending Supervisor</option><option>Approved</option><option>Rejected</option><option>Admin Processing</option><option>Completed</option></select></div></div><div style="overflow:auto"><table><thead><tr><th>Request</th><th>Employee</th><th>Type</th><th>Asset</th><th>Requested</th><th>Status</th><th>Actions</th></tr></thead><tbody id="dashboardRows"></tbody></table></div></div>
+      <div class="card"><div class="section-title"><div><h2 style="margin:0">Request Dashboard</h2><div class="muted">Track request status and open the full submission record.</div></div><div class="filters"><div class="search-wrap"><input id="searchBox" placeholder="Search request, employee, asset, location..." oninput="renderDashboard()"><button class="secondary smallbtn" type="button" onclick="clearDashboardSearch()">Clear</button></div><select id="statusFilter" onchange="renderDashboard()"><option value="All">All Status</option><option>Draft</option><option>Pending Supervisor</option><option>Approved</option><option>Rejected</option><option>Operations Processing</option><option>Completed</option></select><button class="secondary smallbtn" type="button" onclick="exportRequestsCSV()">Export CSV</button><span id="dashboardResultCount" class="result-count"></span></div></div><div style="overflow:auto"><table><thead><tr><th>Request</th><th>Employee</th><th>Type</th><th>Asset</th><th>Requested</th><th>Status</th><th>Actions</th></tr></thead><tbody id="dashboardRows"></tbody></table></div></div>
     </section>
 
     <section id="employee" class="panel">
       <div class="card">
         <div class="section-title"><div><h2 style="margin:0">New Asset Request</h2><div class="muted">Complete the required information and review before sending to your supervisor.</div></div></div>
-        <div class="required-note">Fields marked * are required.</div>
+        <div class="required-note">Fields marked * are required for submission. Drafts may be saved before all fields are complete.</div><div id="editBanner" class="edit-banner hidden"></div>
         <div class="type-row"><div class="type-card active" data-type="Delivery" onclick="selectType(this)"><strong>Delivery</strong><div class="muted">Send asset(s) to a location</div></div><div class="type-card" data-type="Pickup" onclick="selectType(this)"><strong>Pickup</strong><div class="muted">Collect asset(s) from a location</div></div></div>
         <form id="requestForm" onsubmit="return false"><input type="hidden" id="requestType" value="Delivery"><div class="grid">
-          <div><label>Employee Name *</label><input id="employeeName"></div><div><label>Employee ID *</label><input id="employeeId" maxlength="7"></div>
+          <div><label>Employee Name *</label><input id="employeeName" readonly></div><div><label>Employee ID *</label><input id="employeeId" maxlength="7" readonly></div>
           <div><label>Division *</label><select id="division"><option value="">Select division</option><option>VOC</option><option>DA</option><option>NS</option><option>VSD</option></select></div><div><label>Section *</label><input id="section" placeholder="Section / Unit"></div>
           <div class="asset-box"><div class="section-title" style="margin-bottom:4px"><div><strong>Devices / Assets *</strong><div class="muted">Add one or many devices to this request.</div></div></div><div class="asset-entry"><div><label>Asset Type</label><select id="newAssetType"><option value="">Select asset</option><option>Election Equipment</option><option>Laptop</option><option>Tablet</option><option>Printer</option><option>Cart / Container</option><option>Other</option></select></div><div><label>Asset Tag / ID</label><input id="newAssetTag" placeholder="Example: EQ-2201"></div><div><label>Serial Number</label><input id="newSerial" placeholder="Optional"></div><div><label>Qty</label><input id="newQty" type="number" min="1" value="1"></div><button type="button" class="primary" onclick="addAsset()">+ Add Device</button></div><div class="asset-list"><table><thead><tr><th>#</th><th>Asset Type</th><th>Asset Tag / ID</th><th>Serial</th><th>Qty</th><th></th></tr></thead><tbody id="assetRows"></tbody></table><div class="asset-total"><span id="assetCount">0 device lines</span><strong id="assetQtyTotal">Total quantity: 0</strong></div></div></div>
           <div><label>Priority *</label><select id="priority"><option>Normal</option><option>High</option><option>Urgent</option></select></div><div></div>
@@ -50,13 +180,460 @@
           <div><label>Site Contact Name *</label><input id="siteContact"></div><div><label>Site Contact Phone / Extension</label><input id="sitePhone"></div>
           <div class="full"><label>Business Reason / Instructions *</label><textarea id="notes" placeholder="Explain what is needed and any handling, access, or timing instructions."></textarea></div>
         </div>
-        <div class="actions"><button class="secondary" onclick="saveDraft()">Save Draft</button><button class="primary" onclick="openSubmissionReview()">Review & Submit</button><button class="secondary" onclick="clearForm()">Clear</button></div>
+        <div class="actions"><button id="saveDraftBtn" class="secondary" onclick="saveDraft()">Save Draft</button><button class="primary" onclick="openSubmissionReview()">Review & Submit</button><button class="secondary" onclick="clearForm()">Clear Form</button></div>
         <div id="submitNotice" class="notice hidden"></div>
       </div>
     </section>
 
+
+    <section id="reports" class="panel">
+      <div class="card">
+        <div class="section-title">
+          <div>
+            <h2 style="margin:0">Operational Reports Dashboard</h2>
+            <div class="muted">Monitor request volume, device movement, priorities, completion, divisions, and asset types.</div>
+          </div>
+          <div class="report-actions">
+            <select id="reportStatusFilter" onchange="renderReports()">
+              <option value="All">All Status</option>
+              <option>Draft</option>
+              <option>Pending Supervisor</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+              <option>Operations Processing</option>
+              <option>Completed</option>
+            </select>
+            <button class="secondary" type="button" onclick="exportRequestsCSV(true)">Export Report CSV</button>
+          </div>
+        </div>
+        <div class="report-grid">
+          <div class="report-kpi"><small>Total Requests</small><strong id="rTotal">0</strong></div>
+          <div class="report-kpi"><small>Total Device Qty</small><strong id="rDeviceQty">0</strong></div>
+          <div class="report-kpi"><small>Urgent Requests</small><strong id="rUrgent">0</strong></div>
+          <div class="report-kpi"><small>Completion Rate</small><strong id="rCompletion">0%</strong></div>
+        </div>
+        <div class="report-layout">
+          <div class="report-block"><h3>Status Distribution</h3><div id="reportStatusBars"></div></div>
+          <div class="report-block"><h3>Delivery vs Pick Up</h3><div id="reportTypeBars"></div></div>
+          <div class="report-block"><h3>Requests by Division</h3><div id="reportDivisionBars"></div></div>
+          <div class="report-block"><h3>Top Asset Types</h3><div id="reportAssetBars"></div></div>
+        </div>
+      </div>
+    </section>
+    <section id="help" class="panel">
+      <div class="card">
+        <div class="manual-toolbar">
+          <div>
+            <h2 style="margin:0">VOC Pick Up & Delivery Request — User Manual</h2>
+            <div class="muted">Version 1.0 • Built-in guide for Employees, Supervisors, and Admin users.</div>
+          </div>
+          <div class="actions">
+            <input id="manualSearch" class="manual-search" placeholder="Search this manual..." oninput="filterManual()">
+            <button class="secondary" type="button" onclick="clearManualSearch()">Clear</button>
+            <button class="primary" type="button" onclick="window.print()">Print Manual</button>
+          </div>
+        </div>
+
+        <div class="manual-shell">
+          <aside class="manual-nav">
+            <strong>Manual Contents</strong>
+            <button onclick="goManual('m-start')">1. Getting Started</button>
+            <button onclick="goManual('m-workflow')">2. System Workflow</button>
+            <button onclick="goManual('m-employee')">3. Employee Guide</button>
+            <button onclick="goManual('m-supervisor')">4. Supervisor Guide</button>
+            <button onclick="goManual('m-admin')">5. Admin Guide</button>
+            <button onclick="goManual('m-assets')">6. Devices / Assets</button>
+            <button onclick="goManual('m-dashboard')">7. Dashboard & Search</button>
+            <button onclick="goManual('m-reports')">8. Reports & CSV</button>
+            <button onclick="goManual('m-status')">9. Status Definitions</button>
+            <button onclick="goManual('m-history')">10. Request History</button>
+            <button onclick="goManual('m-trouble')">11. Troubleshooting</button>
+            <button onclick="goManual('m-security')">13. Security Notes</button>
+          </aside>
+
+          <div class="manual-content">
+
+            <div id="m-start" class="manual-section" data-manual>
+              <h3>1. Getting Started</h3>
+              <p>VOC Pick Up & Delivery Request is used to create, review, approve, process, track, and report asset movement requests.</p>
+              <h4>Available Roles</h4>
+              <ul>
+                <li><strong>Employee:</strong> Create, save, submit, edit Draft/Rejected requests, and track status.</li>
+                <li><strong>Supervisor:</strong> Review Pending Supervisor requests and approve or reject them.</li>
+                <li><strong>Admin:</strong> Process approved requests and mark work completed.</li>
+              </ul>
+              <div class="manual-tip"><strong>Tip:</strong> Use the tabs at the top of the application to move between Dashboard, role-specific work screens, Reports, Help, and About.</div>
+            </div>
+
+            <div id="m-workflow" class="manual-section" data-manual>
+              <h3>2. System Workflow</h3>
+              <div class="workflow">
+                <div class="workflow-step"><strong>Employee</strong><span>Create request → Add devices → Save Draft or Submit</span></div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step"><strong>Supervisor</strong><span>Review → Approve or Reject</span></div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step"><strong>Admin</strong><span>Start Processing → Complete</span></div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step"><strong>Reporting</strong><span>Dashboard → Search → Reports → CSV</span></div>
+              </div>
+              <p>Each status change is recorded in the request activity history so users can see what happened and when.</p>
+            </div>
+
+            <div id="m-employee" class="manual-section" data-manual>
+              <h3>3. Employee Guide</h3>
+
+              <div class="manual-step"><div class="manual-step-num">1</div><div><strong>Open New Request</strong><p>Select <strong>New Request</strong> from the navigation.</p></div></div>
+              <div class="manual-step"><div class="manual-step-num">2</div><div><strong>Select Request Type</strong><p>Choose <strong>Delivery</strong> when assets are being sent to a location or <strong>Pickup</strong> when assets need to be collected.</p></div></div>
+              <div class="manual-step"><div class="manual-step-num">3</div><div><strong>Complete Request Information</strong><p>Enter Division, Section, Priority, Location, Requested Date, Preferred Time, Site Contact, Phone/Extension, and Business Reason / Instructions.</p></div></div>
+              <div class="manual-step"><div class="manual-step-num">4</div><div><strong>Add Devices</strong><p>Select Asset Type, enter Asset Tag / ID, optional Serial Number, and Quantity. Select <strong>+ Add Device</strong>. Repeat for additional devices.</p></div></div>
+              <div class="manual-step"><div class="manual-step-num">5</div><div><strong>Save or Submit</strong><p>Select <strong>Save Draft</strong> if work is not complete. Select <strong>Review & Submit</strong> when ready.</p></div></div>
+              <div class="manual-step"><div class="manual-step-num">6</div><div><strong>Review</strong><p>Confirm requester information, device lines, quantity, location, date, contact, and instructions.</p></div></div>
+              <div class="manual-step"><div class="manual-step-num">7</div><div><strong>Submit</strong><p>Select <strong>Confirm & Submit</strong>. The request receives a unique Request ID and routes to Supervisor Approval.</p></div></div>
+
+              <div class="manual-warning"><strong>Important:</strong> Employees can edit requests only when they are in <strong>Draft</strong> or <strong>Rejected</strong> status.</div>
+            </div>
+
+            <div id="m-supervisor" class="manual-section" data-manual>
+              <h3>4. Supervisor Guide</h3>
+              <ol>
+                <li>Open <strong>Supervisor Approval</strong>.</li>
+                <li>Review each Pending Supervisor request.</li>
+                <li>Check employee information, request type, priority, requested date, location, devices, quantity, site contact, and instructions.</li>
+                <li>Select <strong>Approve</strong> when the request is valid and ready for Admin.</li>
+                <li>Select <strong>Reject</strong> when the employee needs to make a correction.</li>
+                <li>Use <strong>Reports</strong> to monitor overall workload and status.</li>
+              </ol>
+              <div class="manual-tip">Approved requests move to the Admin queue. Rejected requests return to the employee for editing and resubmission.</div>
+            </div>
+
+            <div id="m-admin" class="manual-section" data-manual>
+              <h3>5. Admin Guide</h3>
+              <ol>
+                <li>Open <strong>Operations Processing</strong>.</li>
+                <li>Review requests with Approved status.</li>
+                <li>Select <strong>Start Processing</strong> when operational work begins.</li>
+                <li>Coordinate asset preparation, delivery, pickup, or handoff as required.</li>
+                <li>Open the request again to verify details before completion.</li>
+                <li>Select <strong>Mark Completed</strong> after the work is finished.</li>
+                <li>Use Dashboard and Reports for monitoring and CSV export.</li>
+              </ol>
+            </div>
+
+            <div id="m-assets" class="manual-section" data-manual>
+              <h3>6. Devices / Assets</h3>
+              <p>One request can contain one or many device lines. This avoids creating separate requests when several devices are moving to the same location under the same business request.</p>
+              <h4>Device Fields</h4>
+              <ul>
+                <li><strong>Asset Type:</strong> Category of equipment.</li>
+                <li><strong>Asset Tag / ID:</strong> Unique identifier for the asset or device line.</li>
+                <li><strong>Serial Number:</strong> Optional hardware serial number.</li>
+                <li><strong>Quantity:</strong> Number of items represented by the line.</li>
+              </ul>
+              <p>Use <strong>Edit</strong> to return a device line to the entry area for changes. Use <strong>Remove</strong> to delete it from the request before submission.</p>
+              <div class="manual-warning">Duplicate Asset Tag / ID values are blocked within the same request.</div>
+            </div>
+
+            <div id="m-dashboard" class="manual-section" data-manual>
+              <h3>7. Dashboard & Search</h3>
+              <p>The Dashboard is the main tracking screen. It shows request counts and a searchable request table.</p>
+              <h4>Search</h4>
+              <p>The search box can match Request ID, Employee, Employee ID, Division, Section, Request Type, Priority, Status, Asset Type, Asset Tag, Serial Number, Location, Site Contact, Notes, and dates.</p>
+              <ul>
+                <li>Type one word for a broad search.</li>
+                <li>Type multiple words to narrow results.</li>
+                <li>Use the Status filter together with search.</li>
+                <li>Select <strong>Clear</strong> to reset search and status filtering.</li>
+                <li>The result count shows how many rows match the current search.</li>
+              </ul>
+              <h4>Open Request</h4>
+              <p>Select <strong>Open</strong> to view full request details, devices, current status, and activity history.</p>
+            </div>
+
+            <div id="m-reports" class="manual-section" data-manual>
+              <h3>8. Reports & CSV Export</h3>
+              <p>The Reports screen is available to Supervisor and Admin roles.</p>
+              <h4>Key Metrics</h4>
+              <ul>
+                <li>Total Requests</li>
+                <li>Total Device Quantity</li>
+                <li>Urgent Requests</li>
+                <li>Completion Rate</li>
+              </ul>
+              <h4>Operational Breakdowns</h4>
+              <ul>
+                <li>Status Distribution</li>
+                <li>Delivery vs Pick Up</li>
+                <li>Requests by Division</li>
+                <li>Top Asset Types</li>
+              </ul>
+              <h4>Export CSV</h4>
+              <p>Select <strong>Export CSV</strong> from the Dashboard to export the current Dashboard search/filter results. Select <strong>Export Report CSV</strong> from Reports to export the current report status selection.</p>
+              <div class="manual-tip">CSV files can be opened in Excel for additional filtering, pivot tables, analysis, or reporting.</div>
+            </div>
+
+            <div id="m-status" class="manual-section" data-manual>
+              <h3>9. Request Status Definitions</h3>
+              <ul>
+                <li><strong>Draft:</strong> Request is saved but has not been submitted.</li>
+                <li><strong>Pending Supervisor:</strong> Employee submitted the request and it is waiting for Supervisor review.</li>
+                <li><strong>Approved:</strong> Supervisor approved the request and it is ready for Admin.</li>
+                <li><strong>Rejected:</strong> Supervisor returned the request to the Employee for correction.</li>
+                <li><strong>Operations Processing:</strong> Admin has started operational processing.</li>
+                <li><strong>Completed:</strong> Pick Up / Delivery work is finished.</li>
+              </ul>
+            </div>
+
+            <div id="m-history" class="manual-section" data-manual>
+              <h3>10. Request History</h3>
+              <p>Each request includes an Activity History. It records major actions such as Draft creation, submission, approval, rejection, Admin processing, completion, and resubmission.</p>
+              <p>Open a request from the Dashboard to review the timeline.</p>
+            </div>
+
+            <div id="m-trouble" class="manual-section" data-manual>
+              <h3>11. Troubleshooting</h3>
+              <h4>I cannot submit the request.</h4>
+              <p>Confirm all required fields are completed, at least one device has been added, Employee ID is valid, and Requested Date is not in the past.</p>
+
+              <h4>I cannot find a request.</h4>
+              <p>Clear the Dashboard search and Status filter, then search again using the Request ID, Employee ID, Asset Tag, or Location.</p>
+
+              <h4>I cannot edit a request.</h4>
+              <p>Employees can edit only Draft or Rejected requests. Requests already submitted or being processed follow the controlled workflow.</p>
+
+              <h4>I do not see Reports.</h4>
+              <p>The Reports tab is available to Supervisor and Admin roles.</p>
+
+              <h4>CSV export shows fewer rows than expected.</h4>
+              <p>Dashboard CSV export follows the current search and status filter. Clear filters before exporting all visible requests.</p>
+
+              <h4>My demo data disappeared or changed.</h4>
+              <p>Version 1.0 currently stores testing data in the browser. Clearing browser storage can remove locally stored demo requests.</p>
+            </div>
+
+            
+            <div id="m-useradmin" class="manual-section" data-manual>
+              <h3>12. Admin User & Access Management</h3>
+              <p>Admins can maintain application users from the <strong>User Management</strong> tab. For demo testing, choose <strong>Admin</strong> on the login screen; the system will automatically load Admin Demo ID <strong>1009001</strong>.</p>
+              <ul>
+                <li>Add new users.</li>
+                <li>Edit employee name, Employee ID, role, division, and active status.</li>
+                <li>Grant access to one or many sections.</li>
+                <li>Activate or deactivate access.</li>
+                <li>Delete users when appropriate.</li>
+              </ul>
+              <h4>Multi-Section Supervisor Access</h4>
+              <p>A Supervisor can be granted multiple sections. The Supervisor Approval queue and dashboard will show requests for those granted sections.</p>
+              <div class="manual-tip">Example: a VOC Supervisor can be granted Operations, Warehouse, QA, and Asset Management at the same time.</div>
+            </div>
+
+<div id="m-security" class="manual-section" data-manual>
+              <h3>13. Security & Production Notes</h3>
+              <p>Version 1.0 is a functional browser-based demonstration. The current role selector and browser storage are intended for testing and design validation.</p>
+              <h4>Recommended Production Design</h4>
+              <p><strong>Microsoft Entra ID → VOC Web Application → Secure API → Azure SQL or Dataverse</strong></p>
+              <ul>
+                <li>Use organization sign-in instead of a role dropdown.</li>
+                <li>Determine Employee, Supervisor, and Admin permissions from authenticated identity or security groups.</li>
+                <li>Store requests, devices, and history in Azure SQL or Dataverse.</li>
+                <li>Enforce approval/status permissions on the server, not only in the browser.</li>
+                <li>Protect database credentials and application secrets.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="panel">
+      <div class="card">
+        <div class="section-title">
+          <div>
+            <h2 style="margin:0">About VOC Pick Up & Delivery Request</h2>
+            <div class="muted">System overview, purpose, features, and Version 1.0 information.</div>
+          </div>
+        </div>
+
+        <div class="version-box">
+          <small>Current Release</small>
+          <strong>Version 1.0</strong>
+          <div>VOC Pick Up & Delivery Request</div>
+        </div>
+
+        <div class="about-meta">
+          <div><small>Primary Purpose</small><strong>Asset Pick Up & Delivery Request Management</strong></div>
+          <div><small>Workflow</small><strong>Employee → Supervisor → Admin</strong></div>
+          <div><small>Request Model</small><strong>One Request → Many Devices</strong></div>
+        </div>
+
+        <div class="help-grid" style="margin-top:16px">
+          <div class="help-card">
+            <h3>What This System Does</h3>
+            <p>VOC Pick Up & Delivery Request is designed to manage operational requests for moving equipment and assets between locations. It provides one place for request submission, approval, processing, completion, history, reporting, and export.</p>
+          </div>
+
+          <div class="help-card">
+            <h3>Core Features</h3>
+            <ul>
+              <li>Role-based Employee, Supervisor, and Admin experience</li><li>Admin User & Access Management</li><li>Multi-section access grants for Supervisors</li>
+              <li>Delivery and Pick Up request types</li>
+              <li>One request with multiple devices</li>
+              <li>Draft saving and resubmission</li>
+              <li>Supervisor approval and rejection</li>
+              <li>Admin processing and completion</li>
+              <li>Dashboard status tracking</li>
+              <li>Search and status filtering</li>
+              <li>Operational Reports Dashboard</li>
+              <li>CSV export</li>
+              <li>Request receipt</li>
+              <li>Activity history / audit trail</li>
+            </ul>
+          </div>
+
+          <div class="help-card">
+            <h3>Data Captured</h3>
+            <ul>
+              <li>Request ID</li>
+              <li>Employee Name and Employee ID</li>
+              <li>Division and Section</li>
+              <li>Delivery or Pick Up</li>
+              <li>Priority</li>
+              <li>Location</li>
+              <li>Requested Date and Preferred Time</li>
+              <li>Site Contact and Phone</li>
+              <li>Business Reason / Instructions</li>
+              <li>Asset Type, Asset Tag, Serial Number, and Quantity</li>
+              <li>Status, Submitted Date, Updated Date, and Request History</li>
+            </ul>
+          </div>
+
+          <div class="help-card">
+            <h3>Version 1.0 Scope</h3>
+            <p>Version 1.0 establishes the initial complete user workflow and user interface for request management. It includes role-based workflow simulation, multi-device requests, approval processing, dashboards, reports, search, history, and CSV export.</p>
+            <div class="callout">
+              Production deployment should replace browser local storage and demo role selection with a secure backend database and organization authentication.
+            </div>
+          </div>
+
+          <div class="help-card">
+            <h3>Recommended Production Architecture</h3>
+            <p><strong>Microsoft 365 / Entra ID → VOC Web App → Secure API → Azure SQL or Dataverse</strong></p>
+            <p>This keeps authentication, role permissions, request records, asset records, approvals, and request history centralized and secure.</p>
+          </div>
+
+          <div class="help-card">
+            <h3>Version 1.0 Workflow Summary</h3>
+            <div class="workflow">
+              <div class="workflow-step"><strong>Employee</strong><span>Create → Add Devices → Save Draft → Review → Submit</span></div>
+              <div class="workflow-arrow">→</div>
+              <div class="workflow-step"><strong>Supervisor</strong><span>Review → Approve or Reject</span></div>
+              <div class="workflow-arrow">→</div>
+              <div class="workflow-step"><strong>Admin</strong><span>Start Processing → Complete</span></div>
+              <div class="workflow-arrow">→</div>
+              <div class="workflow-step"><strong>Reporting</strong><span>Dashboard → Reports → Search → CSV Export</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="supervisor" class="panel"><div class="card"><div class="section-title"><div><h2 style="margin:0">Supervisor Approval Queue</h2><div class="muted">Review employee submissions before routing approved work to Admin.</div></div></div><div style="overflow:auto"><table><thead><tr><th>Request</th><th>Employee</th><th>Asset</th><th>Priority</th><th>Submitted</th><th>Actions</th></tr></thead><tbody id="supervisorRows"></tbody></table></div></div></section>
-    <section id="admin" class="panel"><div class="card"><div class="section-title"><div><h2 style="margin:0">Admin Processing Queue</h2><div class="muted">Assign, process, and complete approved delivery/pickup requests.</div></div></div><div style="overflow:auto"><table><thead><tr><th>Request</th><th>Employee</th><th>Type</th><th>Asset</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="adminRows"></tbody></table></div></div></section>
+
+    <section id="users" class="panel">
+      <div class="card">
+        <div class="section-title">
+          <div>
+            <h2 style="margin:0">User & Access Management</h2>
+            <div class="muted">Admin-only maintenance for user roles, active status, division, and multi-section access.</div>
+          </div>
+        </div>
+
+        <div class="user-admin-grid">
+          <div class="user-form">
+            <h3 style="margin-top:0">Maintain User</h3>
+            <input type="hidden" id="editUserKey">
+
+            <div class="grid">
+              <div class="full">
+                <label>Employee Name *</label>
+                <input id="maintUserName" placeholder="Employee name">
+              </div>
+              <div>
+                <label>Employee ID *</label>
+                <input id="maintUserEmpId" maxlength="7" placeholder="7 digits">
+              </div>
+              <div>
+                <label>Role *</label>
+                <select id="maintUserRole">
+                  <option>Employee</option>
+                  <option>Supervisor</option>
+                  <option>Admin</option>
+                </select>
+              </div>
+              <div>
+                <label>Division *</label>
+                <select id="maintUserDivision" onchange="renderSectionAccessOptions()">
+                  <option value="">Select division</option>
+                  <option>VOC</option>
+                  <option>DA</option>
+                  <option>NS</option>
+                  <option>VSD</option>
+                </select>
+              </div>
+              <div>
+                <label>Active</label>
+                <select id="maintUserActive">
+                  <option value="true">Active</option>
+                  <option value="false">Inactive</option>
+                </select>
+              </div>
+
+              <div class="full">
+                <label>Granted Sections *</label>
+                <div id="maintSectionChecks" class="section-checks"></div>
+                <div class="muted" style="margin-top:6px">Select one or many sections. Supervisors can be granted access across multiple sections.</div>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="primary" type="button" onclick="saveMaintainedUser()">Save User</button>
+              <button class="secondary" type="button" onclick="clearMaintainedUser()">Clear</button>
+            </div>
+            <div id="userMaintNotice" class="notice hidden"></div>
+          </div>
+
+          <div>
+            <div class="section-title">
+              <div>
+                <h3 style="margin:0">Users</h3>
+                <div class="muted">Search and maintain system access.</div>
+              </div>
+              <div class="filters">
+                <input id="userSearch" placeholder="Search employee, ID, role, section..." oninput="renderUserAdmin()">
+              </div>
+            </div>
+
+            <div class="user-table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Employee</th>
+                    <th>Role</th>
+                    <th>Division</th>
+                    <th>Granted Sections</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="userAdminRows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="admin" class="panel"><div class="card"><div class="section-title"><div><h2 style="margin:0">Operations Processing Queue</h2><div class="muted">Assign, process, and complete approved pick up / delivery requests.</div></div></div><div style="overflow:auto"><table><thead><tr><th>Request</th><th>Employee</th><th>Type</th><th>Asset</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="adminRows"></tbody></table></div></div></section>
   </div>
 </div>
 
@@ -69,6 +646,20 @@
 <script>
 /* js/state.js */
 // Central application state and demo seed data.
+
+const SECTION_DIRECTORY = {
+  VOC:['Operations','Asset Management','Warehouse','QA','Support'],
+  DA:['Support','Data Analytics','Reporting','Development'],
+  NS:['North Section','Field Support','Operations'],
+  VSD:['Voter Services','Support','Operations']
+};
+
+const DEFAULT_USERS = [
+  {name:'Demo User',empId:'1002456',role:'Employee',division:'VOC',sections:['Operations'],active:true},
+  {name:'Supervisor Demo',empId:'1003001',role:'Supervisor',division:'VOC',sections:['Operations','Asset Management','Warehouse','QA'],active:true},
+  {name:'Admin Demo',empId:'1009001',role:'Admin',division:'VOC',sections:['Operations','Asset Management','Warehouse','QA','Support'],active:true}
+];
+
 const seed = [
   {
     id:'DP-20260828-1001',employee:'Maria Gomez',empId:'1002456',division:'VOC',section:'Operations',
@@ -98,7 +689,16 @@ const AppState = {
   currentUser: null,
   currentReview: null,
   detailId: null,
-  formAssets: []
+  formAssets: [],
+  editingId: null,
+  users: (() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('voc_users_v1') || 'null');
+      return Array.isArray(saved) ? saved : DEFAULT_USERS.map(u=>({...u,sections:[...u.sections]}));
+    } catch(e) {
+      return DEFAULT_USERS.map(u=>({...u,sections:[...u.sections]}));
+    }
+  })()
 };
 
 </script>
@@ -129,7 +729,7 @@ function badge(status){
   else if(status === 'Pending Supervisor') css = 'pending';
   else if(status === 'Approved') css = 'approved';
   else if(status === 'Rejected') css = 'rejected';
-  else if(status === 'Admin Processing') css = 'processing';
+  else if(status === 'Operations Processing') css = 'processing';
   return `<span class="badge ${css}">${esc(status)}</span>`;
 }
 
@@ -227,28 +827,65 @@ function assetReviewHtml(assets){
 <script>
 /* js/dashboard.js */
 // Dashboard, supervisor queue, admin queue, and summary counts.
+function userCanAccessRequest(r){
+  if(!AppState.currentUser) return false;
+  if(AppState.currentUser.role === 'Admin') return true;
+  if(AppState.currentUser.role === 'Employee') return r.empId === AppState.currentUser.empId;
+  if(AppState.currentUser.role === 'Supervisor'){
+    const sections = AppState.currentUser.sections || [];
+    if(!sections.length) return true;
+    return sections.includes(r.section);
+  }
+  return false;
+}
+
 function visibleData(){
-  return AppState.currentUser.role === 'Employee'
-    ? AppState.requests.filter(r => r.empId === AppState.currentUser.empId)
-    : AppState.requests;
+  return requests.filter(userCanAccessRequest);
+}
+
+function requestSearchText(r){
+  const assets = normalizeAssets(r);
+  return [
+    r.id, r.employee, r.empId, r.division, r.section, r.type, r.priority,
+    r.status, r.location, r.siteContact, r.sitePhone, r.notes,
+    r.date, r.time, r.createdAt, r.submittedAt, r.updatedAt,
+    ...assets.flatMap(a => [a.assetType, a.assetTag, a.serial, a.qty])
+  ].filter(v => v !== undefined && v !== null).join(' ').toLowerCase();
+}
+
+function filteredDashboardData(){
+  const filter = $('statusFilter')?.value || 'All';
+  const query = ($('searchBox')?.value || '').trim().toLowerCase();
+  const tokens = query.split(/\s+/).filter(Boolean);
+  return visibleData().filter(r => {
+    if(filter !== 'All' && r.status !== filter) return false;
+    if(!tokens.length) return true;
+    const haystack = requestSearchText(r);
+    return tokens.every(token => haystack.includes(token));
+  });
+}
+
+function clearDashboardSearch(){
+  if($('searchBox')) $('searchBox').value = '';
+  if($('statusFilter')) $('statusFilter').value = 'All';
+  renderDashboard();
 }
 
 function renderDashboard(){
   if(!AppState.currentUser) return;
-  const filter = $('statusFilter').value;
-  const query = $('searchBox').value.toLowerCase();
-  const data = visibleData().filter(r =>
-    (filter === 'All' || r.status === filter) &&
-    (!query || JSON.stringify(r).toLowerCase().includes(query))
-  );
+  const data = filteredDashboardData();
 
   $('dashboardRows').innerHTML = data.map(r => `<tr>
     <td><strong class="reqid">${r.id}</strong><br><span class="muted">${esc(r.createdAt)}</span></td>
-    <td>${esc(r.employee)}</td><td>${esc(r.type)}</td><td>${assetSummary(r)}</td>
+    <td>${esc(r.employee)}<br><span class="muted">${esc(r.empId)}</span></td>
+    <td>${esc(r.type)}</td><td>${assetSummary(r)}</td>
     <td>${esc(r.date)} ${esc(r.time || '')}</td><td>${badge(r.status)}</td>
     <td><button class="secondary smallbtn" onclick="openDetail('${r.id}')">Open</button></td>
-  </tr>`).join('') || '<tr><td colspan="7">No requests found.</td></tr>';
+  </tr>`).join('') || '<tr><td colspan="7">No requests match your search or status filter.</td></tr>';
 
+  if($('dashboardResultCount')){
+    $('dashboardResultCount').textContent = `${data.length} result${data.length === 1 ? '' : 's'}`;
+  }
   updateStats();
 }
 
@@ -272,7 +909,7 @@ function renderSupervisor(){
 
 function renderAdmin(){
   if(!AppState.currentUser || AppState.currentUser.role !== 'Admin') return;
-  const data = AppState.requests.filter(r => ['Approved','Admin Processing'].includes(r.status));
+  const data = AppState.requests.filter(r => ['Approved','Operations Processing'].includes(r.status));
   $('adminRows').innerHTML = data.map(r => {
     const assets = normalizeAssets(r);
     const total = assets.reduce((n,x) => n + (Number(x.qty) || 0), 0);
@@ -281,8 +918,8 @@ function renderAdmin(){
       <td>${assets.length} device line${assets.length===1?'':'s'} / Qty ${total}</td><td>${esc(r.location)}</td>
       <td>${badge(r.status)}</td><td><button class="secondary smallbtn" onclick="openDetail('${r.id}')">Open</button>
       ${r.status === 'Approved'
-        ? `<button class="primary smallbtn" onclick="setStatus('${r.id}','Admin Processing','Admin started processing')">Start</button>`
-        : `<button class="approve smallbtn" onclick="setStatus('${r.id}','Completed','Delivery/Pickup completed')">Complete</button>`}
+        ? `<button class="primary smallbtn" onclick="setStatus('${r.id}','Operations Processing','Admin started processing')">Start</button>`
+        : `<button class="approve smallbtn" onclick="setStatus('${r.id}','Completed','Pick Up / Delivery completed')">Complete</button>`}
       </td></tr>`;
   }).join('') || '<tr><td colspan="7">No approved requests waiting for Admin.</td></tr>';
 }
@@ -293,44 +930,398 @@ function updateStats(){
   $('sDraft').textContent = data.filter(r => r.status === 'Draft').length;
   $('sPending').textContent = data.filter(r => r.status === 'Pending Supervisor').length;
   $('sApproved').textContent = data.filter(r => r.status === 'Approved').length;
-  $('sProcessing').textContent = data.filter(r => r.status === 'Admin Processing').length;
+  $('sProcessing').textContent = data.filter(r => r.status === 'Operations Processing').length;
   $('sCompleted').textContent = data.filter(r => r.status === 'Completed').length;
 }
 
+
+
+
+function renderSectionAccessOptions(selected = null){
+  const division = $('maintUserDivision')?.value || '';
+  const box = $('maintSectionChecks');
+  if(!box) return;
+
+  const sections = SECTION_DIRECTORY[division] || [];
+  let chosen = selected;
+  if(!Array.isArray(chosen)){
+    const editingId = $('editUserKey')?.value;
+    const existing = editingId ? findManagedUser(editingId) : null;
+    chosen = existing?.sections || [];
+  }
+
+  box.innerHTML = sections.length
+    ? sections.map(section => `
+      <label class="section-check">
+        <input type="checkbox" name="maintSection" value="${esc(section)}" ${chosen.includes(section)?'checked':''}>
+        <span>${esc(section)}</span>
+      </label>`).join('')
+    : '<div class="muted">Select a division to choose section access.</div>';
+}
+
+function getSelectedMaintSections(){
+  return [...document.querySelectorAll('input[name="maintSection"]:checked')].map(x=>x.value);
+}
+
+function showUserMaintNotice(message, isError=false){
+  const n = $('userMaintNotice');
+  if(!n) return;
+  n.textContent = message;
+  n.classList.remove('hidden','error');
+  if(isError) n.classList.add('error');
+}
+
+function clearMaintainedUser(){
+  if($('editUserKey')) $('editUserKey').value='';
+  if($('maintUserName')) $('maintUserName').value='';
+  if($('maintUserEmpId')) $('maintUserEmpId').value='';
+  if($('maintUserRole')) $('maintUserRole').value='Employee';
+  if($('maintUserDivision')) $('maintUserDivision').value='';
+  if($('maintUserActive')) $('maintUserActive').value='true';
+  renderSectionAccessOptions([]);
+  $('userMaintNotice')?.classList.add('hidden');
+}
+
+function saveMaintainedUser(){
+  if(!AppState.currentUser || AppState.currentUser.role !== 'Admin'){
+    alert('Admin access is required.');
+    return;
+  }
+
+  const name = $('maintUserName').value.trim();
+  const empId = $('maintUserEmpId').value.trim();
+  const role = $('maintUserRole').value;
+  const division = $('maintUserDivision').value;
+  const active = $('maintUserActive').value === 'true';
+  const sections = getSelectedMaintSections();
+  const editKey = $('editUserKey').value;
+
+  if(!name || !/^\d{7}$/.test(empId) || !division || !sections.length){
+    showUserMaintNotice('Enter a name, valid 7-digit Employee ID, division, and at least one granted section.', true);
+    return;
+  }
+
+  const duplicate = getManagedUsers().find(u => u.empId === empId && u.empId !== editKey);
+  if(duplicate){
+    showUserMaintNotice('That Employee ID already exists.', true);
+    return;
+  }
+
+  if(editKey){
+    const user = findManagedUser(editKey);
+    if(!user) return;
+    user.name = name;
+    user.empId = empId;
+    user.role = role;
+    user.division = division;
+    user.sections = sections;
+    user.active = active;
+    showUserMaintNotice('User updated successfully.');
+  }else{
+    AppState.users.push({name,empId,role,division,sections,active});
+    showUserMaintNotice('User added successfully.');
+  }
+
+  persistUsers();
+  renderUserAdmin();
+  clearMaintainedUser();
+}
+
+function editMaintainedUser(empId){
+  const user = findManagedUser(empId);
+  if(!user) return;
+  $('editUserKey').value=user.empId;
+  $('maintUserName').value=user.name;
+  $('maintUserEmpId').value=user.empId;
+  $('maintUserRole').value=user.role;
+  $('maintUserDivision').value=user.division;
+  $('maintUserActive').value=String(user.active);
+  renderSectionAccessOptions(user.sections || []);
+  $('userMaintNotice')?.classList.add('hidden');
+  $('maintUserName').focus();
+}
+
+function toggleMaintainedUser(empId){
+  if(!AppState.currentUser || AppState.currentUser.role !== 'Admin') return;
+  const user = findManagedUser(empId);
+  if(!user) return;
+
+  if(user.empId === AppState.currentUser.empId && user.active){
+    alert('You cannot deactivate your own current Admin account.');
+    return;
+  }
+
+  user.active = !user.active;
+  persistUsers();
+  renderUserAdmin();
+}
+
+function deleteMaintainedUser(empId){
+  if(!AppState.currentUser || AppState.currentUser.role !== 'Admin') return;
+  if(empId === AppState.currentUser.empId){
+    alert('You cannot delete your own current Admin account.');
+    return;
+  }
+  const user = findManagedUser(empId);
+  if(!user) return;
+  if(!confirm(`Delete user ${user.name} (${user.empId})?`)) return;
+  AppState.users = AppState.users.filter(u => u.empId !== empId);
+  persistUsers();
+  renderUserAdmin();
+}
+
+function renderUserAdmin(){
+  if(!AppState.currentUser || AppState.currentUser.role !== 'Admin') return;
+  const q = ($('userSearch')?.value || '').trim().toLowerCase();
+
+  const data = getManagedUsers().filter(u => {
+    const hay = [u.name,u.empId,u.role,u.division,...(u.sections||[]),u.active?'active':'inactive'].join(' ').toLowerCase();
+    return !q || hay.includes(q);
+  });
+
+  $('userAdminRows').innerHTML = data.map(u => `
+    <tr class="${u.active?'':'inactive-user'}">
+      <td><strong>${esc(u.name)}</strong><br><span class="muted">${esc(u.empId)}</span></td>
+      <td>${esc(u.role)}</td>
+      <td>${esc(u.division)}</td>
+      <td>${(u.sections||[]).map(s=>`<span class="access-chip">${esc(s)}</span>`).join('') || '—'}</td>
+      <td>${u.active?'<span class="badge approved">Active</span>':'<span class="badge rejected">Inactive</span>'}</td>
+      <td>
+        <div class="user-actions">
+          <button class="secondary smallbtn" onclick="editMaintainedUser('${u.empId}')">Edit</button>
+          <button class="secondary smallbtn" onclick="toggleMaintainedUser('${u.empId}')">${u.active?'Deactivate':'Activate'}</button>
+          <button class="dangerbtn smallbtn" onclick="deleteMaintainedUser('${u.empId}')">Delete</button>
+        </div>
+      </td>
+    </tr>`).join('') || '<tr><td colspan="6">No users found.</td></tr>';
+}
+
+function goManual(id){
+  const el = $(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function filterManual(){
+  const q = ($('manualSearch')?.value || '').trim().toLowerCase();
+  document.querySelectorAll('[data-manual]').forEach(section => {
+    const match = !q || section.textContent.toLowerCase().includes(q);
+    section.classList.toggle('hidden', !match);
+  });
+}
+
+function clearManualSearch(){
+  if($('manualSearch')) $('manualSearch').value = '';
+  document.querySelectorAll('[data-manual]').forEach(section => section.classList.remove('hidden'));
+  goManual('m-start');
+}
+
+function reportData(){
+  const base = visibleData();
+  const filter = $('reportStatusFilter')?.value || 'All';
+  return filter === 'All' ? base : base.filter(r => r.status === filter);
+}
+
+function countBy(items, keyFn){
+  const out = {};
+  items.forEach(item => {
+    const key = keyFn(item) || 'Not specified';
+    out[key] = (out[key] || 0) + 1;
+  });
+  return out;
+}
+
+function renderBars(targetId, counts, limit = 10){
+  const el = $(targetId);
+  if(!el) return;
+  const rows = Object.entries(counts).sort((a,b) => b[1] - a[1]).slice(0, limit);
+  const max = Math.max(1, ...rows.map(x => x[1]));
+  el.innerHTML = rows.length ? rows.map(([label,value]) => `
+    <div class="bar-row">
+      <div class="bar-label" title="${esc(label)}">${esc(label)}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.max(4,(value/max)*100)}%"></div></div>
+      <div class="bar-value">${value}</div>
+    </div>`).join('') : '<div class="empty-report">No data for this filter.</div>';
+}
+
+function renderReports(){
+  if(!AppState.currentUser || !['Supervisor','Admin'].includes(AppState.currentUser.role)) return;
+  const data = reportData();
+  const deviceQty = data.reduce((sum,r) =>
+    sum + normalizeAssets(r).reduce((n,a) => n + (Number(a.qty) || 0), 0), 0);
+  const completed = data.filter(r => r.status === 'Completed').length;
+  const completion = data.length ? Math.round((completed / data.length) * 100) : 0;
+
+  $('rTotal').textContent = data.length;
+  $('rDeviceQty').textContent = deviceQty;
+  $('rUrgent').textContent = data.filter(r => r.priority === 'Urgent').length;
+  $('rCompletion').textContent = `${completion}%`;
+
+  renderBars('reportStatusBars', countBy(data, r => r.status));
+  renderBars('reportTypeBars', countBy(data, r => r.type));
+  renderBars('reportDivisionBars', countBy(data, r => r.division));
+
+  const assetCounts = {};
+  data.forEach(r => normalizeAssets(r).forEach(a => {
+    const key = a.assetType || 'Asset';
+    assetCounts[key] = (assetCounts[key] || 0) + (Number(a.qty) || 0);
+  }));
+  renderBars('reportAssetBars', assetCounts);
+}
+
+function csvEscape(value){
+  const s = String(value ?? '');
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g,'""')}"` : s;
+}
+
+function exportRequestsCSV(useReportFilter = false){
+  if(!AppState.currentUser) return;
+  let data = (useReportFilter && ['Supervisor','Admin'].includes(AppState.currentUser.role))
+    ? reportData()
+    : filteredDashboardData();
+
+  if(!data.length){
+    alert('There are no requests to export for the current filter.');
+    return;
+  }
+
+  const headers = [
+    'Request ID','Employee','Employee ID','Division','Section','Request Type','Priority','Status',
+    'Requested Date','Preferred Time','Location','Site Contact','Site Phone',
+    'Device Lines','Total Quantity','Asset Types','Asset Tags','Serial Numbers',
+    'Business Reason / Instructions','Created At','Submitted At','Updated At'
+  ];
+
+  const rows = data.map(r => {
+    const assets = normalizeAssets(r);
+    return [
+      r.id,r.employee,r.empId,r.division,r.section,r.type,r.priority,r.status,
+      r.date,r.time,r.location,r.siteContact,r.sitePhone,
+      assets.length,
+      assets.reduce((n,a)=>n+(Number(a.qty)||0),0),
+      assets.map(a=>a.assetType).join(' | '),
+      assets.map(a=>a.assetTag).join(' | '),
+      assets.map(a=>a.serial || '').join(' | '),
+      r.notes,r.createdAt,r.submittedAt,r.updatedAt
+    ];
+  });
+
+  const csv = [headers, ...rows].map(row => row.map(csvEscape).join(',')).join('\n');
+  const blob = new Blob(['\ufeff' + csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0,10).replaceAll('-','');
+  link.href = url;
+  link.download = `VOC_Pick_Up_Delivery_Requests_${stamp}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+
 function renderAll(){
   renderDashboard();
+  renderReports();
   renderSupervisor();
   renderAdmin();
+  renderUserAdmin();
 }
 
 </script>
 <script>
 /* js/auth.js */
 // Demo authentication and role-based navigation.
+function getManagedUsers(){
+  return AppState.users || [];
+}
+
+function persistUsers(){
+  localStorage.setItem('voc_users_v1', JSON.stringify(AppState.users || []));
+}
+
+function findManagedUser(empId){
+  return getManagedUsers().find(u => u.empId === empId);
+}
+
+
+function selectDemoRole(){
+  const role = $('loginRole')?.value || 'Employee';
+  const demo = DEFAULT_USERS.find(u => u.role === role);
+  if(!demo) return;
+  $('loginName').value = demo.name;
+  $('loginEmpId').value = demo.empId;
+}
+
 function login(){
-  const name = $('loginName').value.trim() || 'Demo User';
-  const empId = $('loginEmpId').value.trim();
-  const role = $('loginRole').value;
+  const name=$('loginName').value.trim()||'Demo User';
+  const empId=$('loginEmpId').value.trim();
+  const selectedRole=$('loginRole').value;
 
   if(!/^\d{7}$/.test(empId)){
     alert('Employee ID must be exactly 7 digits.');
     return;
   }
 
-  AppState.currentUser = {name, empId, role};
-  $('loginScreen').classList.add('hidden');
+  const selectedDemo = DEFAULT_USERS.find(u => u.role === selectedRole);
+  const isSelectedDemo =
+    selectedDemo &&
+    selectedDemo.empId === empId;
+
+  if(isSelectedDemo){
+    AppState.currentUser = {
+      name: selectedDemo.name,
+      empId: selectedDemo.empId,
+      role: selectedDemo.role,
+      division: selectedDemo.division,
+      sections: [...(selectedDemo.sections || [])]
+    };
+  }else{
+    const managed = findManagedUser(empId);
+
+    if(managed){
+      if(!managed.active){
+        alert('This user account is inactive. Please contact an administrator.');
+        return;
+      }
+
+      AppState.currentUser = {
+        name: managed.name,
+        empId: managed.empId,
+        role: managed.role,
+        division: managed.division,
+        sections: [...(managed.sections || [])]
+      };
+    }else{
+      // Unmanaged IDs are allowed for demo/testing and use the selected role.
+      AppState.currentUser = {
+        name,
+        empId,
+        role: selectedRole,
+        division:'',
+        sections:[]
+      };
+    }
+  }
+
+  $('loginShell').classList.add('hidden');
+  $('loginScreen').classList.remove('hidden');
   $('app').classList.remove('hidden');
-  $('who').textContent = name + ' • ' + empId;
-  $('rolePill').textContent = role;
-  $('employeeName').value = name;
-  $('employeeId').value = empId;
+  $('who').textContent=AppState.currentUser.name+' • '+AppState.currentUser.empId;
+  $('rolePill').textContent=AppState.currentUser.role;
+  $('employeeName').value=AppState.currentUser.name;
+  $('employeeId').value=AppState.currentUser.empId;
+
+  if(AppState.currentUser.division && $('division')){
+    $('division').value = AppState.currentUser.division;
+  }
 
   buildTabs();
-  $('roleNote').textContent = role === 'Employee'
-    ? 'Employee: create, submit, track, and edit draft or rejected requests.'
-    : role === 'Supervisor'
-      ? 'Supervisor: review pending employee requests, approve, or reject with an audit history.'
-      : 'Admin: process approved requests, update work notes, and complete delivery/pickup work.';
+  $('roleNote').textContent =
+    AppState.currentUser.role==='Employee'
+      ? 'Employee: create, submit, track, and edit draft or rejected requests.'
+      : AppState.currentUser.role==='Supervisor'
+        ? `Supervisor: review requests for granted section access${AppState.currentUser.sections?.length ? ' ('+AppState.currentUser.sections.join(', ')+')' : ''}.`
+        : 'Admin: maintain users, permissions, and system access. Operations Processing tracks approved delivery and pick up work.';
 
   renderAll();
   showTab('dashboard');
@@ -340,13 +1331,22 @@ function logout(){
   AppState.currentUser = null;
   $('app').classList.add('hidden');
   $('loginScreen').classList.remove('hidden');
+  $('loginShell').classList.remove('hidden');
+
+  if($('loginRole')) $('loginRole').value='Employee';
+  selectDemoRole();
 }
 
 function buildTabs(){
   const items = [['dashboard','Dashboard']];
   if(AppState.currentUser.role === 'Employee') items.push(['employee','New Request']);
+  if(['Supervisor','Admin'].includes(AppState.currentUser.role)) items.push(['reports','Reports']);
   if(AppState.currentUser.role === 'Supervisor') items.push(['supervisor','Supervisor Approval']);
-  if(AppState.currentUser.role === 'Admin') items.push(['admin','Admin Processing']);
+  if(AppState.currentUser.role === 'Admin') {
+    items.push(['admin','Operations Processing']);
+    items.push(['users','User Management']);
+  }
+  items.push(['help','Help'],['about','About']);
 
   $('tabs').innerHTML = items.map((item,i) =>
     `<button class="tab ${i?'':'active'}" data-tab="${item[0]}" onclick="${item[0] === 'employee' ? `startNewRequest(this)` : `showTab('${item[0]}',this)`}">${item[1]}</button>`
@@ -364,10 +1364,19 @@ function showTab(id, btn){
 
 function startNewRequest(btn){
   AppState.currentReview = null;
-  clearForm(true);
+  AppState.editingId = null;
+  clearForm(true, true);
   showTab('employee', btn);
   setTimeout(() => $('division')?.focus(), 0);
 }
+
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter' && !$('loginShell').classList.contains('hidden') && !$('loginScreen').classList.contains('hidden')){
+    const tag = (document.activeElement?.tagName || '').toLowerCase();
+    if(tag !== 'textarea') login();
+  }
+});
 
 </script>
 <script>
@@ -379,8 +1388,8 @@ function selectType(el){
   $('requestType').value = el.dataset.type;
 }
 
-function validateForm(){
-  const data = {
+function collectFormData(){
+  return {
     employee: $('employeeName').value.trim(),
     empId: $('employeeId').value.trim(),
     division: $('division').value,
@@ -395,12 +1404,14 @@ function validateForm(){
     notes: $('notes').value.trim(),
     type: $('requestType').value
   };
+}
 
+function validateForm(){
+  const data = collectFormData();
   if(!/^\d{7}$/.test(data.empId)) return {ok:false,msg:'Employee ID must be exactly 7 digits.'};
   if(!data.employee || !data.division || !data.section || !data.assets.length || !data.location || !data.date || !data.siteContact || !data.notes){
-    return {ok:false,msg:'Please complete all required fields and add at least one device.'};
+    return {ok:false,msg:'Please complete all required fields and add at least one device before submission.'};
   }
-
   const today = new Date().toISOString().slice(0,10);
   if(data.date < today) return {ok:false,msg:'Requested date cannot be in the past.'};
   return {ok:true,data};
@@ -414,23 +1425,33 @@ function makeId(){
 }
 
 function saveDraft(){
-  const result = validateForm();
-  if(!result.ok){ showNotice(result.msg, true); return; }
-
-  const id = makeId();
+  const data = collectFormData();
+  if(!data.employee || !/^\d{7}$/.test(data.empId)){
+    showNotice('A valid logged-in employee is required before saving a draft.', true); return;
+  }
   const timestamp = now();
-  const request = {
-    id, ...result.data, status:'Draft', adminNote:'', createdAt:timestamp, submittedAt:'', updatedAt:timestamp,
-    history:[{at:timestamp,by:AppState.currentUser.name,action:`Draft created with ${result.data.assets.length} device line(s)`}]
-  };
-
-  AppState.requests.unshift(request);
-  persist();
-  showNotice(`${id} saved as draft.`);
-  clearForm(false);
+  if(AppState.editingId){
+    const request = AppState.requests.find(r => r.id === AppState.editingId);
+    if(!request || request.empId !== AppState.currentUser.empId || !['Draft','Rejected'].includes(request.status)){
+      showNotice('This request can no longer be edited.', true); return;
+    }
+    Object.assign(request, data, {status:'Draft',updatedAt:timestamp});
+    request.history = request.history || [];
+    request.history.push({at:timestamp,by:AppState.currentUser.name,action:'Draft updated'});
+    persist();
+    showNotice(`${request.id} draft updated.`);
+  } else {
+    const id = makeId();
+    const request = {id,...data,status:'Draft',adminNote:'',createdAt:timestamp,submittedAt:'',updatedAt:timestamp,
+      history:[{at:timestamp,by:AppState.currentUser.name,action:'Draft created'}]};
+    AppState.requests.unshift(request);
+    AppState.editingId = id;
+    persist();
+    showNotice(`${id} saved as draft.`);
+    updateEditBanner();
+  }
   renderAll();
 }
-
 function openSubmissionReview(){
   const result = validateForm();
   if(!result.ok){ showNotice(result.msg, true); return; }
@@ -457,26 +1478,26 @@ function closeReview(){ $('reviewModal').classList.add('hidden'); }
 
 function finalSubmit(){
   if(!AppState.currentReview) return;
-  const id = makeId();
   const timestamp = now();
-  const request = {
-    id, ...AppState.currentReview, status:'Pending Supervisor', adminNote:'', createdAt:timestamp,
-    submittedAt:timestamp, updatedAt:timestamp,
-    history:[
-      {at:timestamp,by:AppState.currentUser.name,action:`Request submitted with ${AppState.currentReview.assets.length} device line(s)`},
-      {at:timestamp,by:'System',action:'Routed to Supervisor Approval'}
-    ]
-  };
-
-  AppState.requests.unshift(request);
-  persist();
-  closeReview();
-  AppState.currentReview = null;
-  showReceipt(request);
-  clearForm(false);
-  renderAll();
+  let request;
+  if(AppState.editingId){
+    request = AppState.requests.find(r => r.id === AppState.editingId);
+    if(!request || request.empId !== AppState.currentUser.empId || !['Draft','Rejected'].includes(request.status)){
+      closeReview(); showNotice('This request can no longer be submitted from edit mode.', true); return;
+    }
+    Object.assign(request, AppState.currentReview, {status:'Pending Supervisor',submittedAt:timestamp,updatedAt:timestamp});
+    request.history = request.history || [];
+    request.history.push({at:timestamp,by:AppState.currentUser.name,action:'Request submitted to Supervisor'});
+    request.history.push({at:timestamp,by:'System',action:'Routed to Supervisor Approval'});
+  } else {
+    const id = makeId();
+    request = {id,...AppState.currentReview,status:'Pending Supervisor',adminNote:'',createdAt:timestamp,submittedAt:timestamp,updatedAt:timestamp,
+      history:[{at:timestamp,by:AppState.currentUser.name,action:`Request submitted with ${AppState.currentReview.assets.length} device line(s)`},{at:timestamp,by:'System',action:'Routed to Supervisor Approval'}]};
+    AppState.requests.unshift(request);
+  }
+  persist(); closeReview(); AppState.currentReview = null;
+  showReceipt(request); clearForm(false, true); renderAll();
 }
-
 function showReceipt(request){
   const total = normalizeAssets(request).reduce((n,a) => n + (Number(a.qty)||0),0);
   $('receiptContent').innerHTML = `<div class="receipt"><div class="receipt-head"><div class="muted">Request Number</div>
@@ -499,7 +1520,7 @@ function showNotice(msg, isError=false){
   if(isError) notice.classList.add('error');
 }
 
-function clearForm(hideNotice=true){
+function clearForm(hideNotice=true, resetEditing=true){
   $('requestForm').reset();
   AppState.formAssets = [];
   renderAssetRows();
@@ -507,7 +1528,47 @@ function clearForm(hideNotice=true){
   $('employeeId').value = AppState.currentUser?.empId || '';
   $('requestType').value = 'Delivery';
   document.querySelectorAll('.type-card').forEach((x,i) => x.classList.toggle('active', i === 0));
+  if(resetEditing) AppState.editingId = null;
+  updateEditBanner();
   if(hideNotice) $('submitNotice').classList.add('hidden');
+}
+
+function updateEditBanner(){
+  const b = $('editBanner');
+  if(!b) return;
+  if(AppState.editingId){
+    b.textContent = `Editing ${AppState.editingId}. Save as Draft or Review & Submit when ready.`;
+    b.classList.remove('hidden');
+    $('saveDraftBtn').textContent = 'Update Draft';
+  } else {
+    b.classList.add('hidden');
+    $('saveDraftBtn').textContent = 'Save Draft';
+  }
+}
+
+function editRequest(id){
+  const r = AppState.requests.find(x => x.id === id);
+  if(!r || AppState.currentUser.role !== 'Employee' || r.empId !== AppState.currentUser.empId || !['Draft','Rejected'].includes(r.status)) return;
+  showTab('employee');
+  clearForm(true, false);
+  AppState.editingId = id;
+  $('employeeName').value = r.employee;
+  $('employeeId').value = r.empId;
+  $('division').value = r.division || '';
+  $('section').value = r.section || '';
+  $('priority').value = r.priority || 'Normal';
+  $('location').value = r.location || '';
+  $('requestDate').value = r.date || '';
+  $('requestTime').value = r.time || '';
+  $('siteContact').value = r.siteContact || '';
+  $('sitePhone').value = r.sitePhone || '';
+  $('notes').value = r.notes || '';
+  $('requestType').value = r.type || 'Delivery';
+  document.querySelectorAll('.type-card').forEach(x => x.classList.toggle('active', x.dataset.type === $('requestType').value));
+  AppState.formAssets = normalizeAssets(r).map(a => ({...a}));
+  renderAssetRows(); updateEditBanner();
+  closeDetail();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 </script>
@@ -516,17 +1577,20 @@ function clearForm(hideNotice=true){
 // Supervisor/Admin status changes, request details, and activity history.
 function setStatus(id, status, action){
   const request = AppState.requests.find(x => x.id === id);
-  if(!request) return;
-
+  if(!request || !AppState.currentUser) return;
+  const role = AppState.currentUser.role;
+  const allowed = (role === 'Supervisor' && request.status === 'Pending Supervisor' && ['Approved','Rejected'].includes(status)) ||
+                  (role === 'Admin' && request.status === 'Approved' && status === 'Operations Processing') ||
+                  (role === 'Admin' && request.status === 'Operations Processing' && status === 'Completed');
+  if(!allowed){ alert('This action is not available for your role or the current request status.'); return; }
+  if((status === 'Rejected' || status === 'Completed') && !confirm(`Confirm ${status.toLowerCase()} for ${request.id}?`)) return;
   request.status = status;
   request.updatedAt = now();
   request.history = request.history || [];
   request.history.push({at:request.updatedAt,by:AppState.currentUser.name,action});
-  persist();
-  renderAll();
+  persist(); renderAll();
   if(AppState.detailId === id) openDetail(id);
 }
-
 function openDetail(id){
   const request = AppState.requests.find(x => x.id === id);
   if(!request) return;
@@ -554,15 +1618,18 @@ function openDetail(id){
     </div></div></div>`;
 
   $('detailActions').innerHTML = '';
+  if(AppState.currentUser.role === 'Employee' && request.empId === AppState.currentUser.empId && ['Draft','Rejected'].includes(request.status)){
+    $('detailActions').innerHTML = `<button class="primary" onclick="editRequest('${request.id}')">Edit Request</button>`;
+  }
   if(AppState.currentUser.role === 'Supervisor' && request.status === 'Pending Supervisor'){
     $('detailActions').innerHTML = `<button class="approve" onclick="setStatus('${request.id}','Approved','Approved by Supervisor')">Approve</button>
       <button class="reject" onclick="setStatus('${request.id}','Rejected','Rejected by Supervisor')">Reject</button>`;
   }
   if(AppState.currentUser.role === 'Admin' && request.status === 'Approved'){
-    $('detailActions').innerHTML = `<button class="primary" onclick="setStatus('${request.id}','Admin Processing','Admin started processing')">Start Processing</button>`;
+    $('detailActions').innerHTML = `<button class="primary" onclick="setStatus('${request.id}','Operations Processing','Admin started processing')">Start Processing</button>`;
   }
-  if(AppState.currentUser.role === 'Admin' && request.status === 'Admin Processing'){
-    $('detailActions').innerHTML = `<button class="approve" onclick="setStatus('${request.id}','Completed','Delivery/Pickup completed')">Mark Completed</button>`;
+  if(AppState.currentUser.role === 'Admin' && request.status === 'Operations Processing'){
+    $('detailActions').innerHTML = `<button class="approve" onclick="setStatus('${request.id}','Completed','Pick Up / Delivery completed')">Mark Completed</button>`;
   }
 
   $('detailModal').classList.remove('hidden');
