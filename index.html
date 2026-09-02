@@ -141,12 +141,12 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
   <div class="login-grid">
     <div><label>Name</label><input id="loginName" value="Demo User"></div>
     <div><label>Employee ID</label><input id="loginEmpId" value="1002456" maxlength="7"></div>
-    <div><label>Role</label><select id="loginRole" onchange="selectDemoRole()"><option>Employee</option><option>Supervisor</option><option>Admin</option></select></div>
+    <div><label>Role</label><select id="loginRole" onchange="selectDemoRole()"><option>Employee</option><option>Section Manager</option><option>Supervisor</option><option>Admin</option></select></div>
     <button class="primary" onclick="login()">Sign In</button>
   </div>
   <div class="manual-tip" style="margin-top:12px">
     <strong>Demo login:</strong>
-    Select Employee, Supervisor, or Admin and the matching demo account will load automatically.
+    Select Employee, Section Manager, Supervisor, or Admin and the matching demo account will load automatically.
     Managed users still use their saved role and granted section access when their Employee ID is entered manually.
   </div>
 
@@ -155,14 +155,14 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
 <div id="app" class="hidden">
   <div class="topbar"><div class="brand"><div class="brand-mark">VOC</div><div>VOC Pick Up & Delivery Request<span class="brand-sub">Operations Request Management • Version 1.0</span></div></div><div class="userbox"><span id="who" class="pill"></span><span id="rolePill" class="pill"></span><button class="secondary" onclick="logout()">Change Role</button></div></div>
   <div class="wrap">
-    <div class="hero"><div class="eyebrow">VOC Operations • IDP-style workflow</div><h1>VOC Pick Up & Delivery Request</h1><p class="muted">A controlled workflow for requesting, approving, processing, and completing asset movement with full activity history.</p><div class="workflow"><span>1. Employee Request</span><b>→</b><span>2. Supervisor Approval</span><b>→</b><span>3. Operations Processing</span><b>→</b><span>4. Complete</span></div><div id="roleNote" class="role-note"></div></div>
+    <div class="hero"><div class="eyebrow">VOC Operations • IDP-style workflow</div><h1>VOC Pick Up & Delivery Request</h1><p class="muted">A controlled workflow for requesting, approving, processing, and completing asset movement with full activity history.</p><div class="workflow"><span>1. Employee Request</span><b>→</b><span>2. Section Manager Approval</span><b>→</b><span>3. Operations Processing</span><b>→</b><span>4. Complete</span></div><div id="roleNote" class="role-note"></div></div>
     <div id="tabs" class="tabs"></div>
 
     <section id="dashboard" class="panel active">
       <div class="stats">
         <div class="stat"><small>Total</small><strong id="sTotal">0</strong></div><div class="stat"><small>Draft</small><strong id="sDraft">0</strong></div><div class="stat"><small>Pending</small><strong id="sPending">0</strong></div><div class="stat"><small>Approved</small><strong id="sApproved">0</strong></div><div class="stat"><small>Processing</small><strong id="sProcessing">0</strong></div><div class="stat"><small>Completed</small><strong id="sCompleted">0</strong></div>
       </div>
-      <div class="card"><div class="section-title"><div><h2 style="margin:0">Request Dashboard</h2><div class="muted">Track request status and open the full submission record.</div></div><div class="filters"><div class="search-wrap"><input id="searchBox" placeholder="Search request, employee, asset, location..." oninput="renderDashboard()"><button class="secondary smallbtn" type="button" onclick="clearDashboardSearch()">Clear</button></div><select id="statusFilter" onchange="renderDashboard()"><option value="All">All Status</option><option>Draft</option><option>Pending Supervisor</option><option>Approved</option><option>Rejected</option><option>Operations Processing</option><option>Completed</option></select><button class="secondary smallbtn" type="button" onclick="exportRequestsCSV()">Export CSV</button><span id="dashboardResultCount" class="result-count"></span></div></div><div style="overflow:auto"><table><thead><tr><th>Request</th><th>Employee</th><th>Type</th><th>Asset</th><th>Requested</th><th>Status</th><th>Actions</th></tr></thead><tbody id="dashboardRows"></tbody></table></div></div>
+      <div class="card"><div class="section-title"><div><h2 style="margin:0">Request Dashboard</h2><div class="muted">Track request status and open the full submission record.</div></div><div class="filters"><div class="search-wrap"><input id="searchBox" placeholder="Search request, employee, asset, location..." oninput="renderDashboard()"><button class="secondary smallbtn" type="button" onclick="clearDashboardSearch()">Clear</button></div><select id="statusFilter" onchange="renderDashboard()"><option value="All">All Status</option><option>Draft</option><option>Pending Section Manager</option><option>Approved</option><option>Rejected</option><option>Operations Processing</option><option>Completed</option></select><button class="secondary smallbtn" type="button" onclick="exportRequestsCSV()">Export CSV</button><span id="dashboardResultCount" class="result-count"></span></div></div><div style="overflow:auto"><table><thead><tr><th>Request</th><th>Employee</th><th>Type</th><th>Asset</th><th>Requested</th><th>Status</th><th>Actions</th></tr></thead><tbody id="dashboardRows"></tbody></table></div></div>
     </section>
 
     <section id="employee" class="panel">
@@ -172,7 +172,20 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
         <div class="type-row"><div class="type-card active" data-type="Delivery" onclick="selectType(this)"><strong>Delivery</strong><div class="muted">Send asset(s) to a location</div></div><div class="type-card" data-type="Pickup" onclick="selectType(this)"><strong>Pickup</strong><div class="muted">Collect asset(s) from a location</div></div></div>
         <form id="requestForm" onsubmit="return false"><input type="hidden" id="requestType" value="Delivery"><div class="grid">
           <div><label>Employee Name *</label><input id="employeeName" readonly></div><div><label>Employee ID *</label><input id="employeeId" maxlength="7" readonly></div>
-          <div><label>Division *</label><select id="division"><option value="">Select division</option><option>VOC</option><option>DA</option><option>NS</option><option>VSD</option></select></div><div><label>Section *</label><input id="section" placeholder="Section / Unit"></div>
+          <div>
+              <label>Division *</label>
+              <select id="division" onchange="renderRequestSectionOptions()">
+                <option value="">Select division</option>
+                <option>Operations</option>
+                <option>IT</option>
+              </select>
+            </div>
+            <div>
+              <label>Section *</label>
+              <select id="section">
+                <option value="">Select section</option>
+              </select>
+            </div>
           <div class="asset-box"><div class="section-title" style="margin-bottom:4px"><div><strong>Devices / Assets *</strong><div class="muted">Add one or many devices to this request.</div></div></div><div class="asset-entry"><div><label>Asset Type</label><select id="newAssetType"><option value="">Select asset</option><option>Election Equipment</option><option>Laptop</option><option>Tablet</option><option>Printer</option><option>Cart / Container</option><option>Other</option></select></div><div><label>Asset Tag / ID</label><input id="newAssetTag" placeholder="Example: EQ-2201"></div><div><label>Serial Number</label><input id="newSerial" placeholder="Optional"></div><div><label>Qty</label><input id="newQty" type="number" min="1" value="1"></div><button type="button" class="primary" onclick="addAsset()">+ Add Device</button></div><div class="asset-list"><table><thead><tr><th>#</th><th>Asset Type</th><th>Asset Tag / ID</th><th>Serial</th><th>Qty</th><th></th></tr></thead><tbody id="assetRows"></tbody></table><div class="asset-total"><span id="assetCount">0 device lines</span><strong id="assetQtyTotal">Total quantity: 0</strong></div></div></div>
           <div><label>Priority *</label><select id="priority"><option>Normal</option><option>High</option><option>Urgent</option></select></div><div></div>
           <div class="full"><label>Delivery / Pickup Location *</label><input id="location" placeholder="Building, room, vote center, warehouse, etc."></div>
@@ -197,7 +210,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
             <select id="reportStatusFilter" onchange="renderReports()">
               <option value="All">All Status</option>
               <option>Draft</option>
-              <option>Pending Supervisor</option>
+              <option>Pending Section Manager</option>
               <option>Approved</option>
               <option>Rejected</option>
               <option>Operations Processing</option>
@@ -259,7 +272,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
               <h4>Available Roles</h4>
               <ul>
                 <li><strong>Employee:</strong> Create, save, submit, edit Draft/Rejected requests, and track status.</li>
-                <li><strong>Supervisor:</strong> Review Pending Supervisor requests and approve or reject them.</li>
+                <li><strong>Supervisor:</strong> Review Pending Section Manager requests and approve or reject them.</li>
                 <li><strong>Admin:</strong> Process approved requests and mark work completed.</li>
               </ul>
               <div class="manual-tip"><strong>Tip:</strong> Use the tabs at the top of the application to move between Dashboard, role-specific work screens, Reports, Help, and About.</div>
@@ -288,7 +301,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
               <div class="manual-step"><div class="manual-step-num">4</div><div><strong>Add Devices</strong><p>Select Asset Type, enter Asset Tag / ID, optional Serial Number, and Quantity. Select <strong>+ Add Device</strong>. Repeat for additional devices.</p></div></div>
               <div class="manual-step"><div class="manual-step-num">5</div><div><strong>Save or Submit</strong><p>Select <strong>Save Draft</strong> if work is not complete. Select <strong>Review & Submit</strong> when ready.</p></div></div>
               <div class="manual-step"><div class="manual-step-num">6</div><div><strong>Review</strong><p>Confirm requester information, device lines, quantity, location, date, contact, and instructions.</p></div></div>
-              <div class="manual-step"><div class="manual-step-num">7</div><div><strong>Submit</strong><p>Select <strong>Confirm & Submit</strong>. The request receives a unique Request ID and routes to Supervisor Approval.</p></div></div>
+              <div class="manual-step"><div class="manual-step-num">7</div><div><strong>Submit</strong><p>Select <strong>Confirm & Submit</strong>. The request receives a unique Request ID and routes to Section Manager Approval.</p></div></div>
 
               <div class="manual-warning"><strong>Important:</strong> Employees can edit requests only when they are in <strong>Draft</strong> or <strong>Rejected</strong> status.</div>
             </div>
@@ -296,8 +309,8 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
             <div id="m-supervisor" class="manual-section" data-manual>
               <h3>4. Supervisor Guide</h3>
               <ol>
-                <li>Open <strong>Supervisor Approval</strong>.</li>
-                <li>Review each Pending Supervisor request.</li>
+                <li>Open <strong>Section Manager Approval</strong>.</li>
+                <li>Review each Pending Section Manager request.</li>
                 <li>Check employee information, request type, priority, requested date, location, devices, quantity, site contact, and instructions.</li>
                 <li>Select <strong>Approve</strong> when the request is valid and ready for Admin.</li>
                 <li>Select <strong>Reject</strong> when the employee needs to make a correction.</li>
@@ -375,7 +388,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
               <h3>9. Request Status Definitions</h3>
               <ul>
                 <li><strong>Draft:</strong> Request is saved but has not been submitted.</li>
-                <li><strong>Pending Supervisor:</strong> Employee submitted the request and it is waiting for Supervisor review.</li>
+                <li><strong>Pending Section Manager:</strong> Employee submitted the request and it is waiting for Supervisor review.</li>
                 <li><strong>Approved:</strong> Supervisor approved the request and it is ready for Admin.</li>
                 <li><strong>Rejected:</strong> Supervisor returned the request to the Employee for correction.</li>
                 <li><strong>Operations Processing:</strong> Admin has started operational processing.</li>
@@ -411,7 +424,27 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
             </div>
 
             
-            <div id="m-useradmin" class="manual-section" data-manual>
+            
+            <div id="m-org" class="manual-section" data-manual>
+              <h3>Organization Demo: Division, Section & Approval</h3>
+              <p>The demo uses two Divisions. Each Division contains four Sections, and each Section has a Section Manager responsible for approving requests from that Section.</p>
+              <table>
+                <thead><tr><th>Division</th><th>Section</th><th>Demo Section Manager</th><th>Employee ID</th></tr></thead>
+                <tbody>
+                  <tr><td>Operations</td><td>Asset Management</td><td>Alex Morgan</td><td>1003101</td></tr>
+                  <tr><td>Operations</td><td>Warehouse Operations</td><td>Maria Gomez</td><td>1003102</td></tr>
+                  <tr><td>Operations</td><td>Quality Assurance (QA)</td><td>Jordan Lee</td><td>1003103</td></tr>
+                  <tr><td>Operations</td><td>Logistics &amp; Field Support</td><td>Taylor Smith</td><td>1003104</td></tr>
+                  <tr><td>IT</td><td>Application Support</td><td>Chris Johnson</td><td>1003201</td></tr>
+                  <tr><td>IT</td><td>Data &amp; Reporting</td><td>Sam Wilson</td><td>1003202</td></tr>
+                  <tr><td>IT</td><td>Systems &amp; Infrastructure</td><td>Jamie Brown</td><td>1003203</td></tr>
+                  <tr><td>IT</td><td>Development &amp; Automation</td><td>Morgan Davis</td><td>1003204</td></tr>
+                </tbody>
+              </table>
+              <div class="manual-tip"><strong>Approval workflow:</strong> Employee submits request → the Section Manager for that employee/request Section reviews it → approved request moves to Operations Processing → Completed.</div>
+            </div>
+
+<div id="m-useradmin" class="manual-section" data-manual>
               <h3>12. Admin User & Access Management</h3>
               <p>Admins can maintain application users from the <strong>User Management</strong> tab. For demo testing, choose <strong>Admin</strong> on the login screen; the system will automatically load Admin Demo ID <strong>1009001</strong>.</p>
               <ul>
@@ -422,8 +455,8 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
                 <li>Delete users when appropriate.</li>
               </ul>
               <h4>Multi-Section Supervisor Access</h4>
-              <p>A Supervisor can be granted multiple sections. The Supervisor Approval queue and dashboard will show requests for those granted sections.</p>
-              <div class="manual-tip">Example: a VOC Supervisor can be granted Operations, Warehouse, QA, and Asset Management at the same time.</div>
+              <p>A Supervisor can be granted multiple sections. The Section Manager Approval queue and dashboard will show requests for those granted sections.</p>
+              <div class="manual-tip">Example: an Operations Supervisor can be granted Asset Management, Warehouse Operations, Quality Assurance (QA), and Logistics & Field Support at the same time.</div>
             </div>
 
 <div id="m-security" class="manual-section" data-manual>
@@ -462,7 +495,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
 
         <div class="about-meta">
           <div><small>Primary Purpose</small><strong>Asset Pick Up & Delivery Request Management</strong></div>
-          <div><small>Workflow</small><strong>Employee → Supervisor → Admin</strong></div>
+          <div><small>Workflow</small><strong>Employee → Section Manager → Admin</strong></div>
           <div><small>Request Model</small><strong>One Request → Many Devices</strong></div>
         </div>
 
@@ -537,7 +570,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
       </div>
     </section>
 
-    <section id="supervisor" class="panel"><div class="card"><div class="section-title"><div><h2 style="margin:0">Supervisor Approval Queue</h2><div class="muted">Review employee submissions before routing approved work to Admin.</div></div></div><div style="overflow:auto"><table><thead><tr><th>Request</th><th>Employee</th><th>Asset</th><th>Priority</th><th>Submitted</th><th>Actions</th></tr></thead><tbody id="supervisorRows"></tbody></table></div></div></section>
+    <section id="supervisor" class="panel"><div class="card"><div class="section-title"><div><h2 style="margin:0">Section Manager Approval Queue</h2><div class="muted">Review employee submissions before routing approved work to Admin.</div></div></div><div style="overflow:auto"><table><thead><tr><th>Request</th><th>Employee</th><th>Asset</th><th>Priority</th><th>Submitted</th><th>Actions</th></tr></thead><tbody id="supervisorRows"></tbody></table></div></div></section>
 
     <section id="users" class="panel">
       <div class="card">
@@ -566,6 +599,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
                 <label>Role *</label>
                 <select id="maintUserRole">
                   <option>Employee</option>
+                  <option>Section Manager</option>
                   <option>Supervisor</option>
                   <option>Admin</option>
                 </select>
@@ -574,10 +608,8 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
                 <label>Division *</label>
                 <select id="maintUserDivision" onchange="renderSectionAccessOptions()">
                   <option value="">Select division</option>
-                  <option>VOC</option>
-                  <option>DA</option>
-                  <option>NS</option>
-                  <option>VSD</option>
+                  <option>Operations</option>
+                  <option>IT</option>
                 </select>
               </div>
               <div>
@@ -639,7 +671,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
 
 <div id="reviewModal" class="modal hidden"><div class="modal-card"><div class="modal-head"><div><h2 style="margin:0">Review Submission</h2><div class="muted">Confirm the information before sending it to your supervisor.</div></div><button class="close" onclick="closeReview()">Close</button></div><div id="reviewContent"></div><div class="confirm-box"><strong>Submission confirmation</strong><div class="muted">By submitting, you confirm the request information is accurate and ready for supervisor review.</div></div><div class="actions"><button class="secondary" onclick="closeReview()">Back to Edit</button><button class="primary" onclick="finalSubmit()">Confirm & Submit</button></div></div></div>
 
-<div id="receiptModal" class="modal hidden"><div class="modal-card"><div class="modal-head"><div><div class="successIcon">✓</div><h2 class="successTitle">Request Submitted</h2><div class="muted">Your request was successfully routed to Supervisor Approval.</div></div><button class="close" onclick="closeReceipt()">Close</button></div><div id="receiptContent"></div><div class="actions"><button class="primary" onclick="closeReceipt();showTab('dashboard')">View My Requests</button><button class="secondary" onclick="window.print()">Print / Save Receipt</button></div></div></div>
+<div id="receiptModal" class="modal hidden"><div class="modal-card"><div class="modal-head"><div><div class="successIcon">✓</div><h2 class="successTitle">Request Submitted</h2><div class="muted">Your request was successfully routed to Section Manager Approval.</div></div><button class="close" onclick="closeReceipt()">Close</button></div><div id="receiptContent"></div><div class="actions"><button class="primary" onclick="closeReceipt();showTab('dashboard')">View My Requests</button><button class="secondary" onclick="window.print()">Print / Save Receipt</button></div></div></div>
 
 <div id="detailModal" class="modal hidden"><div class="modal-card"><div class="modal-head"><div><h2 id="detailTitle" style="margin:0"></h2><div class="muted">Request details, routing, and activity history.</div></div><button class="close" onclick="closeDetail()">Close</button></div><div id="detailContent"></div><div id="detailActions" class="actions"></div></div></div>
 
@@ -648,27 +680,36 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
 // Central application state and demo seed data.
 
 const SECTION_DIRECTORY = {
-  VOC:['Operations','Asset Management','Warehouse','QA','Support'],
-  DA:['Support','Data Analytics','Reporting','Development'],
-  NS:['North Section','Field Support','Operations'],
-  VSD:['Voter Services','Support','Operations']
+  Operations:['Asset Management','Warehouse Operations','Quality Assurance (QA)','Logistics & Field Support'],
+  IT:['Application Support','Data & Reporting','Systems & Infrastructure','Development & Automation']
 };
 
 const DEFAULT_USERS = [
-  {name:'Demo User',empId:'1002456',role:'Employee',division:'VOC',sections:['Operations'],active:true},
-  {name:'Supervisor Demo',empId:'1003001',role:'Supervisor',division:'VOC',sections:['Operations','Asset Management','Warehouse','QA'],active:true},
-  {name:'Admin Demo',empId:'1009001',role:'Admin',division:'VOC',sections:['Operations','Asset Management','Warehouse','QA','Support'],active:true}
+  {name:'Demo User',empId:'1002456',role:'Employee',division:'Operations',sections:['Warehouse Operations'],active:true},
+
+  {name:'Alex Morgan',empId:'1003101',role:'Section Manager',division:'Operations',sections:['Asset Management'],active:true},
+  {name:'Maria Gomez',empId:'1003102',role:'Section Manager',division:'Operations',sections:['Warehouse Operations'],active:true},
+  {name:'Jordan Lee',empId:'1003103',role:'Section Manager',division:'Operations',sections:['Quality Assurance (QA)'],active:true},
+  {name:'Taylor Smith',empId:'1003104',role:'Section Manager',division:'Operations',sections:['Logistics & Field Support'],active:true},
+
+  {name:'Chris Johnson',empId:'1003201',role:'Section Manager',division:'IT',sections:['Application Support'],active:true},
+  {name:'Sam Wilson',empId:'1003202',role:'Section Manager',division:'IT',sections:['Data & Reporting'],active:true},
+  {name:'Jamie Brown',empId:'1003203',role:'Section Manager',division:'IT',sections:['Systems & Infrastructure'],active:true},
+  {name:'Morgan Davis',empId:'1003204',role:'Section Manager',division:'IT',sections:['Development & Automation'],active:true},
+
+  {name:'Supervisor Demo',empId:'1003001',role:'Supervisor',division:'Operations',sections:['Asset Management','Warehouse Operations','Quality Assurance (QA)','Logistics & Field Support'],active:true},
+  {name:'Admin Demo',empId:'1009001',role:'Admin',division:'IT',sections:['Application Support','Data & Reporting','Systems & Infrastructure','Development & Automation'],active:true}
 ];
 
 const seed = [
   {
     id:'DP-20260828-1001',employee:'Maria Gomez',empId:'1002456',division:'VOC',section:'Operations',
     type:'Delivery',assetType:'Election Equipment',assetTag:'EQ-2201',qty:2,date:'2026-08-29',time:'09:00',
-    priority:'Urgent',status:'Pending Supervisor',location:'Site A',siteContact:'Alex Rivera',sitePhone:'x4421',
+    priority:'Urgent',status:'Pending Section Manager',location:'Site A',siteContact:'Alex Rivera',sitePhone:'x4421',
     notes:'Equipment needed for setup.',adminNote:'',createdAt:'2026-08-28 08:40',submittedAt:'2026-08-28 08:45',
     updatedAt:'2026-08-28 08:45',history:[
       {at:'2026-08-28 08:40',by:'Maria Gomez',action:'Draft created'},
-      {at:'2026-08-28 08:45',by:'Maria Gomez',action:'Submitted to Supervisor'}
+      {at:'2026-08-28 08:45',by:'Maria Gomez',action:'Submitted to Section Manager'}
     ]
   },
   {
@@ -678,7 +719,7 @@ const seed = [
     adminNote:'',createdAt:'2026-08-28 09:10',submittedAt:'2026-08-28 09:15',updatedAt:'2026-08-28 09:40',
     history:[
       {at:'2026-08-28 09:10',by:'Ana Patel',action:'Draft created'},
-      {at:'2026-08-28 09:15',by:'Ana Patel',action:'Submitted to Supervisor'},
+      {at:'2026-08-28 09:15',by:'Ana Patel',action:'Submitted to Section Manager'},
       {at:'2026-08-28 09:40',by:'Supervisor Demo',action:'Approved'}
     ]
   }
@@ -693,7 +734,7 @@ const AppState = {
   editingId: null,
   users: (() => {
     try {
-      const saved = JSON.parse(localStorage.getItem('voc_users_v1') || 'null');
+      const saved = JSON.parse(localStorage.getItem('voc_users_v1_org4_section_mgr') || 'null');
       return Array.isArray(saved) ? saved : DEFAULT_USERS.map(u=>({...u,sections:[...u.sections]}));
     } catch(e) {
       return DEFAULT_USERS.map(u=>({...u,sections:[...u.sections]}));
@@ -726,7 +767,7 @@ function esc(s){
 function badge(status){
   let css = 'completed';
   if(status === 'Draft') css = 'draft';
-  else if(status === 'Pending Supervisor') css = 'pending';
+  else if(status === 'Pending Section Manager') css = 'pending';
   else if(status === 'Approved') css = 'approved';
   else if(status === 'Rejected') css = 'rejected';
   else if(status === 'Operations Processing') css = 'processing';
@@ -831,9 +872,9 @@ function userCanAccessRequest(r){
   if(!AppState.currentUser) return false;
   if(AppState.currentUser.role === 'Admin') return true;
   if(AppState.currentUser.role === 'Employee') return r.empId === AppState.currentUser.empId;
-  if(AppState.currentUser.role === 'Supervisor'){
+  if(['Section Manager','Supervisor'].includes(AppState.currentUser.role)){
     const sections = AppState.currentUser.sections || [];
-    if(!sections.length) return true;
+    if(!sections.length) return false;
     return sections.includes(r.section);
   }
   return false;
@@ -891,7 +932,7 @@ function renderDashboard(){
 
 function renderSupervisor(){
   if(!AppState.currentUser || AppState.currentUser.role !== 'Supervisor') return;
-  const data = AppState.requests.filter(r => r.status === 'Pending Supervisor');
+  const data = AppState.requests.filter(r => r.status === 'Pending Section Manager');
   $('supervisorRows').innerHTML = data.map(r => {
     const assets = normalizeAssets(r);
     const total = assets.reduce((n,x) => n + (Number(x.qty) || 0), 0);
@@ -928,7 +969,7 @@ function updateStats(){
   const data = visibleData();
   $('sTotal').textContent = data.length;
   $('sDraft').textContent = data.filter(r => r.status === 'Draft').length;
-  $('sPending').textContent = data.filter(r => r.status === 'Pending Supervisor').length;
+  $('sPending').textContent = data.filter(r => r.status === 'Pending Section Manager').length;
   $('sApproved').textContent = data.filter(r => r.status === 'Approved').length;
   $('sProcessing').textContent = data.filter(r => r.status === 'Operations Processing').length;
   $('sCompleted').textContent = data.filter(r => r.status === 'Completed').length;
@@ -936,6 +977,26 @@ function updateStats(){
 
 
 
+
+function renderRequestSectionOptions(selectedSection = ''){
+  const divisionEl = $('division');
+  const sectionEl = $('section');
+  if(!divisionEl || !sectionEl) return;
+
+  const division = divisionEl.value;
+  const sections = SECTION_DIRECTORY[division] || [];
+
+  sectionEl.innerHTML = '<option value="">Select section</option>' +
+    sections.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
+
+  if(selectedSection && sections.includes(selectedSection)){
+    sectionEl.value = selectedSection;
+  } else if(AppState.currentUser?.role === 'Employee' &&
+            AppState.currentUser?.division === division &&
+            (AppState.currentUser?.sections || []).length === 1) {
+    sectionEl.value = AppState.currentUser.sections[0];
+  }
+}
 
 function renderSectionAccessOptions(selected = null){
   const division = $('maintUserDivision')?.value || '';
@@ -1236,7 +1297,7 @@ function getManagedUsers(){
 }
 
 function persistUsers(){
-  localStorage.setItem('voc_users_v1', JSON.stringify(AppState.users || []));
+  localStorage.setItem('voc_users_v1_org4_section_mgr', JSON.stringify(AppState.users || []));
 }
 
 function findManagedUser(empId){
@@ -1313,15 +1374,24 @@ function login(){
 
   if(AppState.currentUser.division && $('division')){
     $('division').value = AppState.currentUser.division;
+    renderRequestSectionOptions(
+      AppState.currentUser.role === 'Employee' && (AppState.currentUser.sections || []).length === 1
+        ? AppState.currentUser.sections[0]
+        : ''
+    );
+  } else {
+    renderRequestSectionOptions();
   }
 
   buildTabs();
   $('roleNote').textContent =
     AppState.currentUser.role==='Employee'
       ? 'Employee: create, submit, track, and edit draft or rejected requests.'
-      : AppState.currentUser.role==='Supervisor'
-        ? `Supervisor: review requests for granted section access${AppState.currentUser.sections?.length ? ' ('+AppState.currentUser.sections.join(', ')+')' : ''}.`
-        : 'Admin: maintain users, permissions, and system access. Operations Processing tracks approved delivery and pick up work.';
+      : AppState.currentUser.role==='Section Manager'
+        ? `Section Manager: approve requests for assigned section${AppState.currentUser.sections?.length ? ' ('+AppState.currentUser.sections.join(', ')+')' : ''}.`
+        : AppState.currentUser.role==='Supervisor'
+          ? `Supervisor: review requests for granted section access${AppState.currentUser.sections?.length ? ' ('+AppState.currentUser.sections.join(', ')+')' : ''}.`
+          : 'Admin: maintain users, permissions, and system access. Operations Processing tracks approved delivery and pick up work.';
 
   renderAll();
   showTab('dashboard');
@@ -1341,7 +1411,7 @@ function buildTabs(){
   const items = [['dashboard','Dashboard']];
   if(AppState.currentUser.role === 'Employee') items.push(['employee','New Request']);
   if(['Supervisor','Admin'].includes(AppState.currentUser.role)) items.push(['reports','Reports']);
-  if(AppState.currentUser.role === 'Supervisor') items.push(['supervisor','Supervisor Approval']);
+  if(['Section Manager','Supervisor'].includes(AppState.currentUser.role)) items.push(['supervisor','Section Approval']);
   if(AppState.currentUser.role === 'Admin') {
     items.push(['admin','Operations Processing']);
     items.push(['users','User Management']);
@@ -1485,14 +1555,14 @@ function finalSubmit(){
     if(!request || request.empId !== AppState.currentUser.empId || !['Draft','Rejected'].includes(request.status)){
       closeReview(); showNotice('This request can no longer be submitted from edit mode.', true); return;
     }
-    Object.assign(request, AppState.currentReview, {status:'Pending Supervisor',submittedAt:timestamp,updatedAt:timestamp});
+    Object.assign(request, AppState.currentReview, {status:'Pending Section Manager',submittedAt:timestamp,updatedAt:timestamp});
     request.history = request.history || [];
     request.history.push({at:timestamp,by:AppState.currentUser.name,action:'Request submitted to Supervisor'});
-    request.history.push({at:timestamp,by:'System',action:'Routed to Supervisor Approval'});
+    request.history.push({at:timestamp,by:'System',action:'Routed to Section Manager Approval'});
   } else {
     const id = makeId();
-    request = {id,...AppState.currentReview,status:'Pending Supervisor',adminNote:'',createdAt:timestamp,submittedAt:timestamp,updatedAt:timestamp,
-      history:[{at:timestamp,by:AppState.currentUser.name,action:`Request submitted with ${AppState.currentReview.assets.length} device line(s)`},{at:timestamp,by:'System',action:'Routed to Supervisor Approval'}]};
+    request = {id,...AppState.currentReview,status:'Pending Section Manager',adminNote:'',createdAt:timestamp,submittedAt:timestamp,updatedAt:timestamp,
+      history:[{at:timestamp,by:AppState.currentUser.name,action:`Request submitted with ${AppState.currentReview.assets.length} device line(s)`},{at:timestamp,by:'System',action:'Routed to Section Manager Approval'}]};
     AppState.requests.unshift(request);
   }
   persist(); closeReview(); AppState.currentReview = null;
@@ -1502,7 +1572,7 @@ function showReceipt(request){
   const total = normalizeAssets(request).reduce((n,a) => n + (Number(a.qty)||0),0);
   $('receiptContent').innerHTML = `<div class="receipt"><div class="receipt-head"><div class="muted">Request Number</div>
     <div class="reqid" style="font-size:20px">${request.id}</div></div><div class="receipt-body"><div class="summaryBand">
-    <div><small>Status</small><strong>Pending Supervisor</strong></div>
+    <div><small>Status</small><strong>Pending Section Manager</strong></div>
     <div><small>Submitted</small><strong>${esc(request.submittedAt)}</strong></div>
     <div><small>Device Lines</small><strong>${normalizeAssets(request).length}</strong></div>
     <div><small>Total Quantity</small><strong>${total}</strong></div></div>
@@ -1579,7 +1649,7 @@ function setStatus(id, status, action){
   const request = AppState.requests.find(x => x.id === id);
   if(!request || !AppState.currentUser) return;
   const role = AppState.currentUser.role;
-  const allowed = (role === 'Supervisor' && request.status === 'Pending Supervisor' && ['Approved','Rejected'].includes(status)) ||
+  const allowed = (role === 'Supervisor' && request.status === 'Pending Section Manager' && ['Approved','Rejected'].includes(status)) ||
                   (role === 'Admin' && request.status === 'Approved' && status === 'Operations Processing') ||
                   (role === 'Admin' && request.status === 'Operations Processing' && status === 'Completed');
   if(!allowed){ alert('This action is not available for your role or the current request status.'); return; }
@@ -1621,7 +1691,7 @@ function openDetail(id){
   if(AppState.currentUser.role === 'Employee' && request.empId === AppState.currentUser.empId && ['Draft','Rejected'].includes(request.status)){
     $('detailActions').innerHTML = `<button class="primary" onclick="editRequest('${request.id}')">Edit Request</button>`;
   }
-  if(AppState.currentUser.role === 'Supervisor' && request.status === 'Pending Supervisor'){
+  if(AppState.currentUser.role === 'Supervisor' && request.status === 'Pending Section Manager'){
     $('detailActions').innerHTML = `<button class="approve" onclick="setStatus('${request.id}','Approved','Approved by Supervisor')">Approve</button>
       <button class="reject" onclick="setStatus('${request.id}','Rejected','Rejected by Supervisor')">Reject</button>`;
   }
