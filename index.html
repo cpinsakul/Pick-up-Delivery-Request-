@@ -137,7 +137,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
 <body>
 <div id="loginShell" class="login-shell"><div id="loginScreen" class="login">
   <div class="login-brand"><div class="login-logo">VOC</div><div><div class="eyebrow">Operations Request System</div><h1>VOC Pick Up & Delivery Request</h1></div></div>
-  <p class="muted">IDP-style role workflow for Employee, Supervisor, and Admin request management.</p>
+  <p class="muted">Role-based workflow for Employee, Section Manager, Operations Processing, and Admin management.</p>
   <div class="login-grid">
     <div><label>Name</label><input id="loginName" value="Demo User"></div>
     <div><label>Employee ID</label><input id="loginEmpId" value="1002456" maxlength="7"></div>
@@ -238,7 +238,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
         <div class="manual-toolbar">
           <div>
             <h2 style="margin:0">VOC Pick Up & Delivery Request — User Manual</h2>
-            <div class="muted">Version 1.0 • Built-in guide for Employees, Supervisors, and Admin users.</div>
+            <div class="muted">Version 1.0 • Built-in guide for Employees, Section Managers, Supervisors, and Admin users.</div>
           </div>
           <div class="actions">
             <input id="manualSearch" class="manual-search" placeholder="Search this manual..." oninput="filterManual()">
@@ -253,7 +253,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
             <button onclick="goManual('m-start')">1. Getting Started</button>
             <button onclick="goManual('m-workflow')">2. System Workflow</button>
             <button onclick="goManual('m-employee')">3. Employee Guide</button>
-            <button onclick="goManual('m-supervisor')">4. Supervisor Guide</button>
+            <button onclick="goManual('m-supervisor')">4. Section Manager Guide</button>
             <button onclick="goManual('m-admin')">5. Admin Guide</button>
             <button onclick="goManual('m-assets')">6. Devices / Assets</button>
             <button onclick="goManual('m-dashboard')">7. Dashboard & Search</button>
@@ -272,7 +272,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
               <h4>Available Roles</h4>
               <ul>
                 <li><strong>Employee:</strong> Create, save, submit, edit Draft/Rejected requests, and track status.</li>
-                <li><strong>Supervisor:</strong> Review Pending Section Manager requests and approve or reject them.</li>
+                <li><strong>Section Manager:</strong> Review requests for assigned sections and approve or reject them.</li>
                 <li><strong>Admin:</strong> Process approved requests and mark work completed.</li>
               </ul>
               <div class="manual-tip"><strong>Tip:</strong> Use the tabs at the top of the application to move between Dashboard, role-specific work screens, Reports, Help, and About.</div>
@@ -283,7 +283,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
               <div class="workflow">
                 <div class="workflow-step"><strong>Employee</strong><span>Create request → Add devices → Save Draft or Submit</span></div>
                 <div class="workflow-arrow">→</div>
-                <div class="workflow-step"><strong>Supervisor</strong><span>Review → Approve or Reject</span></div>
+                <div class="workflow-step"><strong>Section Manager</strong><span>Review → Approve or Reject</span></div>
                 <div class="workflow-arrow">→</div>
                 <div class="workflow-step"><strong>Admin</strong><span>Start Processing → Complete</span></div>
                 <div class="workflow-arrow">→</div>
@@ -307,12 +307,12 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
             </div>
 
             <div id="m-supervisor" class="manual-section" data-manual>
-              <h3>4. Supervisor Guide</h3>
+              <h3>4. Section Manager Guide</h3>
               <ol>
                 <li>Open <strong>Section Manager Approval</strong>.</li>
                 <li>Review each Pending Section Manager request.</li>
                 <li>Check employee information, request type, priority, requested date, location, devices, quantity, site contact, and instructions.</li>
-                <li>Select <strong>Approve</strong> when the request is valid and ready for Admin.</li>
+                <li>Select <strong>Approve</strong> when the request is valid and ready for Operations Processing.</li>
                 <li>Select <strong>Reject</strong> when the employee needs to make a correction.</li>
                 <li>Use <strong>Reports</strong> to monitor overall workload and status.</li>
               </ol>
@@ -388,9 +388,9 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
               <h3>9. Request Status Definitions</h3>
               <ul>
                 <li><strong>Draft:</strong> Request is saved but has not been submitted.</li>
-                <li><strong>Pending Section Manager:</strong> Employee submitted the request and it is waiting for Supervisor review.</li>
-                <li><strong>Approved:</strong> Supervisor approved the request and it is ready for Admin.</li>
-                <li><strong>Rejected:</strong> Supervisor returned the request to the Employee for correction.</li>
+                <li><strong>Pending Section Manager:</strong> Employee submitted the request and it is waiting for Section Manager review.</li>
+                <li><strong>Approved:</strong> Section Manager approved the request and it is ready for Operations Processing.</li>
+                <li><strong>Rejected:</strong> Section Manager returned the request to the Employee for correction.</li>
                 <li><strong>Operations Processing:</strong> Admin has started operational processing.</li>
                 <li><strong>Completed:</strong> Pick Up / Delivery work is finished.</li>
               </ul>
@@ -512,7 +512,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
               <li>Delivery and Pick Up request types</li>
               <li>One request with multiple devices</li>
               <li>Draft saving and resubmission</li>
-              <li>Supervisor approval and rejection</li>
+              <li>Section Manager approval and rejection</li>
               <li>Admin processing and completion</li>
               <li>Dashboard status tracking</li>
               <li>Search and status filtering</li>
@@ -559,7 +559,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
             <div class="workflow">
               <div class="workflow-step"><strong>Employee</strong><span>Create → Add Devices → Save Draft → Review → Submit</span></div>
               <div class="workflow-arrow">→</div>
-              <div class="workflow-step"><strong>Supervisor</strong><span>Review → Approve or Reject</span></div>
+              <div class="workflow-step"><strong>Section Manager</strong><span>Review → Approve or Reject</span></div>
               <div class="workflow-arrow">→</div>
               <div class="workflow-step"><strong>Admin</strong><span>Start Processing → Complete</span></div>
               <div class="workflow-arrow">→</div>
@@ -638,10 +638,11 @@ table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{pad
             <div class="section-title">
               <div>
                 <h3 style="margin:0">Users</h3>
-                <div class="muted">Search and maintain system access.</div>
+                <div class="muted">Search and maintain system access. Demo structure: Operations and IT divisions, four sections each.</div>
               </div>
               <div class="filters">
                 <input id="userSearch" placeholder="Search employee, ID, role, section..." oninput="renderUserAdmin()">
+                <button class="secondary smallbtn" type="button" onclick="resetDemoUsers()">Reset Demo Users</button>
               </div>
             </div>
 
@@ -703,30 +704,65 @@ const DEFAULT_USERS = [
 
 const seed = [
   {
-    id:'DP-20260828-1001',employee:'Maria Gomez',empId:'1002456',division:'VOC',section:'Operations',
-    type:'Delivery',assetType:'Election Equipment',assetTag:'EQ-2201',qty:2,date:'2026-08-29',time:'09:00',
-    priority:'Urgent',status:'Pending Section Manager',location:'Site A',siteContact:'Alex Rivera',sitePhone:'x4421',
-    notes:'Equipment needed for setup.',adminNote:'',createdAt:'2026-08-28 08:40',submittedAt:'2026-08-28 08:45',
-    updatedAt:'2026-08-28 08:45',history:[
-      {at:'2026-08-28 08:40',by:'Maria Gomez',action:'Draft created'},
-      {at:'2026-08-28 08:45',by:'Maria Gomez',action:'Submitted to Section Manager'}
+    id:'DP-20260903-1001',employee:'Demo User',empId:'1002456',
+    division:'Operations',section:'Warehouse Operations',
+    type:'Delivery',priority:'Urgent',status:'Pending Section Manager',
+    location:'VOC Warehouse',date:'2026-09-04',time:'09:00',
+    siteContact:'Maria Gomez',sitePhone:'x4421',
+    notes:'Demo delivery request for warehouse equipment.',
+    assets:[
+      {assetType:'Election Equipment',assetTag:'EQ-2201',serial:'SN-2201',qty:2},
+      {assetType:'Cart',assetTag:'CT-0108',serial:'',qty:1}
+    ],
+    adminNote:'',createdAt:'2026-09-03 08:40',submittedAt:'2026-09-03 08:45',
+    updatedAt:'2026-09-03 08:45',
+    history:[
+      {at:'2026-09-03 08:40',by:'Demo User',action:'Draft created'},
+      {at:'2026-09-03 08:45',by:'Demo User',action:'Request submitted to Section Manager'},
+      {at:'2026-09-03 08:45',by:'System',action:'Routed to Section Manager Approval'}
     ]
   },
   {
-    id:'DP-20260828-1002',employee:'Ana Patel',empId:'1003881',division:'DA',section:'Support',
-    type:'Delivery',assetType:'Laptop',assetTag:'L-4812',qty:1,date:'2026-08-30',time:'10:00',priority:'High',
-    status:'Approved',location:'Room 204',siteContact:'Ana Patel',sitePhone:'',notes:'Temporary workstation.',
-    adminNote:'',createdAt:'2026-08-28 09:10',submittedAt:'2026-08-28 09:15',updatedAt:'2026-08-28 09:40',
+    id:'DP-20260903-1002',employee:'Casey Nguyen',empId:'1003881',
+    division:'IT',section:'Application Support',
+    type:'Pick Up',priority:'High',status:'Approved',
+    location:'IT Workroom',date:'2026-09-05',time:'10:00',
+    siteContact:'Chris Johnson',sitePhone:'x2255',
+    notes:'Demo pick up request for IT equipment.',
+    assets:[
+      {assetType:'Laptop',assetTag:'LT-4812',serial:'L4812-SN',qty:1}
+    ],
+    adminNote:'',createdAt:'2026-09-03 09:10',submittedAt:'2026-09-03 09:15',
+    updatedAt:'2026-09-03 09:40',
     history:[
-      {at:'2026-08-28 09:10',by:'Ana Patel',action:'Draft created'},
-      {at:'2026-08-28 09:15',by:'Ana Patel',action:'Submitted to Section Manager'},
-      {at:'2026-08-28 09:40',by:'Supervisor Demo',action:'Approved'}
+      {at:'2026-09-03 09:10',by:'Casey Nguyen',action:'Draft created'},
+      {at:'2026-09-03 09:15',by:'Casey Nguyen',action:'Request submitted to Section Manager'},
+      {at:'2026-09-03 09:40',by:'Chris Johnson',action:'Approved by Section Manager'}
+    ]
+  },
+  {
+    id:'DP-20260903-1003',employee:'Robin Garcia',empId:'1004772',
+    division:'Operations',section:'Asset Management',
+    type:'Delivery',priority:'Normal',status:'Operations Processing',
+    location:'Asset Staging Area',date:'2026-09-06',time:'13:00',
+    siteContact:'Alex Morgan',sitePhone:'x3310',
+    notes:'Demo request currently being processed.',
+    assets:[
+      {assetType:'Scanner',assetTag:'SC-1008',serial:'SC1008-SN',qty:3}
+    ],
+    adminNote:'',createdAt:'2026-09-03 10:00',submittedAt:'2026-09-03 10:05',
+    updatedAt:'2026-09-03 10:30',
+    history:[
+      {at:'2026-09-03 10:00',by:'Robin Garcia',action:'Draft created'},
+      {at:'2026-09-03 10:05',by:'Robin Garcia',action:'Request submitted to Section Manager'},
+      {at:'2026-09-03 10:15',by:'Alex Morgan',action:'Approved by Section Manager'},
+      {at:'2026-09-03 10:30',by:'Admin Demo',action:'Operations Processing started'}
     ]
   }
 ];
 
 const AppState = {
-  requests: JSON.parse(localStorage.getItem('dp_requests_real') || 'null') || seed,
+  requests: JSON.parse(localStorage.getItem('voc_pickup_delivery_requests_v3') || 'null') || seed,
   currentUser: null,
   currentReview: null,
   detailId: null,
@@ -734,8 +770,18 @@ const AppState = {
   editingId: null,
   users: (() => {
     try {
-      const saved = JSON.parse(localStorage.getItem('voc_users_v1_org4_section_mgr') || 'null');
-      return Array.isArray(saved) ? saved : DEFAULT_USERS.map(u=>({...u,sections:[...u.sections]}));
+      const saved = JSON.parse(localStorage.getItem('voc_users_v2_section_mgr') || 'null');
+      if(Array.isArray(saved) && saved.length){
+        return saved.map(u => ({
+          name:u.name || 'User',
+          empId:String(u.empId || ''),
+          role:u.role || 'Employee',
+          division:u.division || '',
+          sections:Array.isArray(u.sections) ? u.sections : [],
+          active:u.active !== false
+        }));
+      }
+      return DEFAULT_USERS.map(u=>({...u,sections:[...u.sections]}));
     } catch(e) {
       return DEFAULT_USERS.map(u=>({...u,sections:[...u.sections]}));
     }
@@ -749,7 +795,7 @@ const AppState = {
 const $ = id => document.getElementById(id);
 
 function persist(){
-  localStorage.setItem('dp_requests_real', JSON.stringify(AppState.requests));
+  localStorage.setItem('voc_pickup_delivery_requests_v3', JSON.stringify(AppState.requests));
 }
 
 function now(){
@@ -931,21 +977,24 @@ function renderDashboard(){
 }
 
 function renderSupervisor(){
-  if(!AppState.currentUser || AppState.currentUser.role !== 'Supervisor') return;
-  const data = AppState.requests.filter(r => r.status === 'Pending Section Manager');
+  if(!AppState.currentUser || !['Section Manager','Supervisor'].includes(AppState.currentUser.role)) return;
+  const data = AppState.requests.filter(r =>
+    r.status === 'Pending Section Manager' && userCanAccessRequest(r)
+  );
+
   $('supervisorRows').innerHTML = data.map(r => {
     const assets = normalizeAssets(r);
     const total = assets.reduce((n,x) => n + (Number(x.qty) || 0), 0);
     return `<tr>
-      <td><strong class="reqid">${r.id}</strong></td>
+      <td><strong class="reqid">${r.id}</strong><br><span class="muted">${esc(r.division)} / ${esc(r.section)}</span></td>
       <td>${esc(r.employee)}<br><span class="muted">${esc(r.empId)}</span></td>
       <td>${assets.length} device line${assets.length===1?'':'s'}<br><span class="muted">Total qty ${total}</span></td>
       <td>${esc(r.priority)}</td><td>${esc(r.submittedAt || '')}</td>
       <td><button class="secondary smallbtn" onclick="openDetail('${r.id}')">Review</button>
-      <button class="approve smallbtn" onclick="setStatus('${r.id}','Approved','Approved by Supervisor')">Approve</button>
-      <button class="reject smallbtn" onclick="setStatus('${r.id}','Rejected','Rejected by Supervisor')">Reject</button></td>
+      <button class="approve smallbtn" onclick="setStatus('${r.id}','Approved','Approved by Section Manager')">Approve</button>
+      <button class="reject smallbtn" onclick="setStatus('${r.id}','Rejected','Rejected by Section Manager')">Reject</button></td>
     </tr>`;
-  }).join('') || '<tr><td colspan="6">No requests waiting for supervisor review.</td></tr>';
+  }).join('') || '<tr><td colspan="6">No requests waiting for your section approval.</td></tr>';
 }
 
 function renderAdmin(){
@@ -959,10 +1008,10 @@ function renderAdmin(){
       <td>${assets.length} device line${assets.length===1?'':'s'} / Qty ${total}</td><td>${esc(r.location)}</td>
       <td>${badge(r.status)}</td><td><button class="secondary smallbtn" onclick="openDetail('${r.id}')">Open</button>
       ${r.status === 'Approved'
-        ? `<button class="primary smallbtn" onclick="setStatus('${r.id}','Operations Processing','Admin started processing')">Start</button>`
+        ? `<button class="primary smallbtn" onclick="setStatus('${r.id}','Operations Processing','Operations Processing started')">Start</button>`
         : `<button class="approve smallbtn" onclick="setStatus('${r.id}','Completed','Pick Up / Delivery completed')">Complete</button>`}
       </td></tr>`;
-  }).join('') || '<tr><td colspan="7">No approved requests waiting for Admin.</td></tr>';
+  }).join('') || '<tr><td colspan="7">No approved requests waiting for Operations Processing.</td></tr>';
 }
 
 function updateStats(){
@@ -1133,14 +1182,21 @@ function deleteMaintainedUser(empId){
 
 function renderUserAdmin(){
   if(!AppState.currentUser || AppState.currentUser.role !== 'Admin') return;
-  const q = ($('userSearch')?.value || '').trim().toLowerCase();
+  const tbody = $('userAdminRows');
+  if(!tbody) return;
 
+  if(!Array.isArray(AppState.users) || !AppState.users.length){
+    AppState.users = DEFAULT_USERS.map(u => ({...u,sections:[...(u.sections || [])]}));
+    persistUsers();
+  }
+
+  const q = ($('userSearch')?.value || '').trim().toLowerCase();
   const data = getManagedUsers().filter(u => {
     const hay = [u.name,u.empId,u.role,u.division,...(u.sections||[]),u.active?'active':'inactive'].join(' ').toLowerCase();
     return !q || hay.includes(q);
   });
 
-  $('userAdminRows').innerHTML = data.map(u => `
+  tbody.innerHTML = data.map(u => `
     <tr class="${u.active?'':'inactive-user'}">
       <td><strong>${esc(u.name)}</strong><br><span class="muted">${esc(u.empId)}</span></td>
       <td>${esc(u.role)}</td>
@@ -1155,6 +1211,15 @@ function renderUserAdmin(){
         </div>
       </td>
     </tr>`).join('') || '<tr><td colspan="6">No users found.</td></tr>';
+}
+
+function resetDemoUsers(){
+  if(!AppState.currentUser || AppState.currentUser.role !== 'Admin') return;
+  if(!confirm('Reset User Management to the demo user list?')) return;
+  AppState.users = DEFAULT_USERS.map(u => ({...u,sections:[...(u.sections || [])]}));
+  persistUsers();
+  if($('userSearch')) $('userSearch').value='';
+  renderUserAdmin();
 }
 
 function goManual(id){
@@ -1297,7 +1362,7 @@ function getManagedUsers(){
 }
 
 function persistUsers(){
-  localStorage.setItem('voc_users_v1_org4_section_mgr', JSON.stringify(AppState.users || []));
+  localStorage.setItem('voc_users_v2_section_mgr', JSON.stringify(AppState.users || []));
 }
 
 function findManagedUser(empId){
@@ -1557,7 +1622,7 @@ function finalSubmit(){
     }
     Object.assign(request, AppState.currentReview, {status:'Pending Section Manager',submittedAt:timestamp,updatedAt:timestamp});
     request.history = request.history || [];
-    request.history.push({at:timestamp,by:AppState.currentUser.name,action:'Request submitted to Supervisor'});
+    request.history.push({at:timestamp,by:AppState.currentUser.name,action:'Request submitted to Section Manager'});
     request.history.push({at:timestamp,by:'System',action:'Routed to Section Manager Approval'});
   } else {
     const id = makeId();
@@ -1577,7 +1642,7 @@ function showReceipt(request){
     <div><small>Device Lines</small><strong>${normalizeAssets(request).length}</strong></div>
     <div><small>Total Quantity</small><strong>${total}</strong></div></div>
     <div class="timeline"><div class="event"><strong>${esc(request.submittedAt)}</strong><div><strong>Submission received</strong>
-    <div class="muted">The request is now waiting for supervisor review.</div></div></div></div></div></div>`;
+    <div class="muted">The request is now waiting for Section Manager review.</div></div></div></div></div></div>`;
   $('receiptModal').classList.remove('hidden');
 }
 
@@ -1594,10 +1659,20 @@ function clearForm(hideNotice=true, resetEditing=true){
   $('requestForm').reset();
   AppState.formAssets = [];
   renderAssetRows();
+
   $('employeeName').value = AppState.currentUser?.name || '';
   $('employeeId').value = AppState.currentUser?.empId || '';
   $('requestType').value = 'Delivery';
   document.querySelectorAll('.type-card').forEach((x,i) => x.classList.toggle('active', i === 0));
+
+  if(AppState.currentUser?.role === 'Employee' && AppState.currentUser.division){
+    $('division').value = AppState.currentUser.division;
+    renderRequestSectionOptions((AppState.currentUser.sections || []).length === 1 ? AppState.currentUser.sections[0] : '');
+  } else {
+    $('division').value = '';
+    renderRequestSectionOptions();
+  }
+
   if(resetEditing) AppState.editingId = null;
   updateEditBanner();
   if(hideNotice) $('submitNotice').classList.add('hidden');
@@ -1625,7 +1700,7 @@ function editRequest(id){
   $('employeeName').value = r.employee;
   $('employeeId').value = r.empId;
   $('division').value = r.division || '';
-  $('section').value = r.section || '';
+  renderRequestSectionOptions(r.section || '');
   $('priority').value = r.priority || 'Normal';
   $('location').value = r.location || '';
   $('requestDate').value = r.date || '';
@@ -1648,17 +1723,33 @@ function editRequest(id){
 function setStatus(id, status, action){
   const request = AppState.requests.find(x => x.id === id);
   if(!request || !AppState.currentUser) return;
+
   const role = AppState.currentUser.role;
-  const allowed = (role === 'Supervisor' && request.status === 'Pending Section Manager' && ['Approved','Rejected'].includes(status)) ||
-                  (role === 'Admin' && request.status === 'Approved' && status === 'Operations Processing') ||
-                  (role === 'Admin' && request.status === 'Operations Processing' && status === 'Completed');
-  if(!allowed){ alert('This action is not available for your role or the current request status.'); return; }
-  if((status === 'Rejected' || status === 'Completed') && !confirm(`Confirm ${status.toLowerCase()} for ${request.id}?`)) return;
+  const sectionApproval =
+    ['Section Manager','Supervisor'].includes(role) &&
+    request.status === 'Pending Section Manager' &&
+    ['Approved','Rejected'].includes(status) &&
+    userCanAccessRequest(request);
+
+  const operationsAction =
+    role === 'Admin' &&
+    ((request.status === 'Approved' && status === 'Operations Processing') ||
+     (request.status === 'Operations Processing' && status === 'Completed'));
+
+  if(!sectionApproval && !operationsAction){
+    alert('This action is not available for your role, assigned section, or the current request status.');
+    return;
+  }
+
+  if((status === 'Rejected' || status === 'Completed') &&
+     !confirm(`Confirm ${status.toLowerCase()} for ${request.id}?`)) return;
+
   request.status = status;
   request.updatedAt = now();
   request.history = request.history || [];
   request.history.push({at:request.updatedAt,by:AppState.currentUser.name,action});
-  persist(); renderAll();
+  persist();
+  renderAll();
   if(AppState.detailId === id) openDetail(id);
 }
 function openDetail(id){
@@ -1691,12 +1782,14 @@ function openDetail(id){
   if(AppState.currentUser.role === 'Employee' && request.empId === AppState.currentUser.empId && ['Draft','Rejected'].includes(request.status)){
     $('detailActions').innerHTML = `<button class="primary" onclick="editRequest('${request.id}')">Edit Request</button>`;
   }
-  if(AppState.currentUser.role === 'Supervisor' && request.status === 'Pending Section Manager'){
-    $('detailActions').innerHTML = `<button class="approve" onclick="setStatus('${request.id}','Approved','Approved by Supervisor')">Approve</button>
-      <button class="reject" onclick="setStatus('${request.id}','Rejected','Rejected by Supervisor')">Reject</button>`;
+  if(['Section Manager','Supervisor'].includes(AppState.currentUser.role) &&
+     request.status === 'Pending Section Manager' &&
+     userCanAccessRequest(request)){
+    $('detailActions').innerHTML = `<button class="approve" onclick="setStatus('${request.id}','Approved','Approved by Section Manager')">Approve</button>
+      <button class="reject" onclick="setStatus('${request.id}','Rejected','Rejected by Section Manager')">Reject</button>`;
   }
   if(AppState.currentUser.role === 'Admin' && request.status === 'Approved'){
-    $('detailActions').innerHTML = `<button class="primary" onclick="setStatus('${request.id}','Operations Processing','Admin started processing')">Start Processing</button>`;
+    $('detailActions').innerHTML = `<button class="primary" onclick="setStatus('${request.id}','Operations Processing','Operations Processing started')">Start Processing</button>`;
   }
   if(AppState.currentUser.role === 'Admin' && request.status === 'Operations Processing'){
     $('detailActions').innerHTML = `<button class="approve" onclick="setStatus('${request.id}','Completed','Pick Up / Delivery completed')">Mark Completed</button>`;
